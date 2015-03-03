@@ -1,0 +1,34 @@
+<div style="padding-left: 25px">
+    <strong>Relationships <button class="btn btn-default btn-xs" type="button" ng-click="getRelationships(operation.id)" data-toggle="collapse" data-target="#relationship{{operation.id}}" aria-expanded="false" aria-controls="relationship{{operation.id}}">
+            <i class="fa fa-refresh fa-s"></i> 
+        </button></strong>
+    <hr>
+
+    <div class="collapse" id="relationship{{operation.id}}">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Relationship</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr ng-repeat="relationship in relationships">
+                    <td>{{relationship.component_name}} </td>
+                    <td>{{relationship.component_type}}</td>
+                    <td>{{relationship.relationship_type}}</td>
+                    
+                </tr>
+
+            </tbody>
+        </table>
+
+
+
+    </div>
+</div>
+

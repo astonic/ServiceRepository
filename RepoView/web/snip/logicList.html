@@ -1,0 +1,18 @@
+<div style="padding-left: 25px">
+                                 <strong>Logic and Rules <button class="btn btn-default btn-xs" type="button" ng-click="getRules(operation.id)" data-toggle="collapse" data-target="#ruleList{{operation.id}}" aria-expanded="false" aria-controls="ruleList{{operation.id}}">
+                                    <i class="fa fa-refresh fa-lg"></i> 
+                                </button></strong>
+                                    <hr>
+                                
+                            <div class="collapse" id="ruleList{{operation.id}}">
+                                <div style="padding-left: 25px">
+                                   
+                                    <div ng-repeat="rule in rules" >
+                                        <strong>Type: {{rule.type}}</strong><br>
+                                        <strong>Description:</strong>
+                                        <p>{{rule.description}}</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>

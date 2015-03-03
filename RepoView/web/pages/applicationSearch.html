@@ -1,0 +1,32 @@
+<div class="row">
+
+    <div class="col-xs-8 col-sm-4">
+        <h4>Application Search</h4>
+        <div class="input-group">
+            
+            <input type="text" class="form-control" ng-model="searchValue"  placeholder="Search for application...">
+            <span class="input-group-btn">
+                <button class="btn btn-default" ng-click="doSearch()" type="button">Go!</button>
+            </span>
+        </div><!-- /input-group -->
+
+    </div>
+   
+    <div class="col-xs-6">
+         <a class="btn btn-warning pull-right" ng-href="#/applicationNew"  > <i class="fa fa-plus"></i>&nbsp;New Application</a>
+    </div>
+</div> 
+
+
+<div class="row">
+
+    <div class="col-xs-10">
+        <p class="small">Search looks at tags and name. You can use % pre/post for a wildcard search  </p>
+        <div ng-repeat="application in applications"  class="one-result">
+
+            <a ng-href="#/applicationEdit/{{application.id}}" class="large">{{application.name}} | {{application.domain}}</a>
+            <p>{{application.description}}</p>
+        </div>
+    </div>
+    
+</div>

@@ -1,0 +1,80 @@
+<div class="row">
+    <div class="col-md-12">
+        <h2>Service Repository</h2>   
+        <h5>For all interfaces</h5>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-6">           
+        <div class="panel panel-back noti-box">
+            <a ng-href="#/applicationSearch">
+            <span class="icon-box bg-color-red set-icon">
+                 <i class="fa fa-envelope-o"></i> 
+            </span>
+                </a> 
+            <div class="text-box">
+                <p class="main-text">{{applicationTotal}}</p>
+                <p class="text-muted">Applications</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-6">           
+        <div class="panel panel-back noti-box">
+             <a ng-href="#/searchService">
+            <span class="icon-box bg-color-green set-icon">
+                <i class="fa fa-bars"></i>
+            </span>
+             </a>
+            <div class="text-box">
+                <p class="main-text">{{serviceTotal}} </p>
+                <p class="text-muted">Services </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-6">           
+        <div class="panel panel-back noti-box">
+             <a ng-href="#/operationSearch">
+            <span class="icon-box bg-color-blue set-icon">
+                <i class="fa fa-barcode"></i>
+            </span>
+             </a>
+            <div class="text-box">
+                <p class="main-text">{{operationTotal}} </p>
+                <p class="text-muted">Operations</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-6">           
+        <div class="panel panel-back noti-box">
+            <span class="icon-box bg-color-green set-icon">
+                <i class="fa fa-adjust"></i>
+            </span>
+            <div class="text-box">
+                <p class="main-text">{{projectTotal}} </p>
+                <p class="text-muted">Projects</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+                <div class="col-md-4 col-sm-4">
+                    <div class="well well-lg">
+                        <h4>Services and Operations</h4>
+                        <p>Service can be a backend service or a service in OSB/SOA. A service can be linked to a producing project. Operations are interface functions that belong to a service.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <div class="well well-lg">
+                        <h4>Application</h4>
+                        <p>Applications are backend systems that other systems call for for specific functionality. SOA can be represented as a backend to other applications </p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <div class="well well-lg">
+                        <h4>Rules,Logic and Relationship</h4>
+                        <p>Rules can be Error handling, Business Rules or transformation rules. Logic represents prominent logic that operation employs</p>
+                    </div>
+                </div>
+            </div>

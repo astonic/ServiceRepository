@@ -1,0 +1,47 @@
+<div class="panel  panel-default">
+            <div class="panel-heading">Change History </div>
+            <div class="panel-body">
+                <form class="form-horizontal bootstrap-validator-form ng-pristine ng-valid" id="defaultForm" novalidate="novalidate">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Rule or Logic Type</label>
+                            <div class="col-sm-5">
+                                <div class="dropdown">
+                                    <button class="btn btn-default dropdown-toggle ng-binding" id="dropdownMenu1" type="button" data-toggle="dropdown">
+                                        {{history.type}}
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                        <li role="presentation"><a tabindex="-1" role="menuitem" ng-click="changeType('Production Fix')">Production Fix</a></li>
+                                        <li role="presentation"><a tabindex="-1" role="menuitem" ng-click="changeType('Testing Fix')">Testing Fix</a></li>
+                                        <li role="presentation"><a tabindex="-1" role="menuitem" ng-click="changeType('Enhancement')">Enhancement</a></li>
+                                        <li role="presentation"><a tabindex="-1" role="menuitem" ng-click="changeType('New Operation')">New Operation</a></li>
+                                                                            </ul>
+                                </div>
+                            </div>
+                            <small class="help-block col-sm-offset-3 col-sm-9" style="display: none;"></small></div>
+
+                        
+                        
+                    </fieldset>
+                    <fieldset>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Description</label>
+                            <div class="col-sm-5">
+                                <textarea name="desc" title="" class="form-control ng-pristine ng-untouched ng-valid" data-original-title="" ng-model="history.description"></textarea>
+                            </div>
+                            <small class="help-block col-sm-offset-3 col-sm-9" style="display: none;"></small></div>
+                        
+                         
+                    </fieldset>
+                    <div>
+                        <button type="button"  ng-disabled="{{!$root.update}}" ng-show="{{edit}}" class="btn btn-danger"><i class="fa fa-trash-o fa-lg"></i> Delete</button>
+                        <button type="button" ng-disabled="{{!$root.update}}" ng-click="save()" ng-show="{{!edit}}" class="btn btn-info"><i class="fa fa-save fa-lg"></i> Save</button>
+                        <button type="button" ng-disabled="{{!$root.update}}" ng-click="update()" ng-show="{{edit}}"  class="btn btn-info"><i class="fa fa-pencil-square-o fa-lg"></i> Update</button>
+                        <a type="button"  class="btn btn-info pull-right"  href back-button><i class="fa fa-arrow-left"></i> Back</a>
+                        
+                    </div>
+                </form>
+            </div>
+    </div>
