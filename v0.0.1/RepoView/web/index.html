@@ -66,12 +66,22 @@
                     </div>
                 </div>
                 <div class="col-md-9" >
-
-                  
+                    <div ng-controller="appCtrl">
+                       
+                        <div id="mydiv" ng-show="loading" >
+ 
+    <img src="css/ajax-loader.gif" class="ajax-loader"/>
+</div>
+                        
+                        
                         <div ng-view autoscroll="true" > style="width: 98%">
 
                         </div>
+   
+                        
                     </div>
+                  
+                                         </div>
                 </div>     
             
             <!-- /. PAGE INNER  -->
@@ -109,5 +119,6 @@
         <script src="app/common/directives.js" type="text/javascript"></script>
         <script src="app/modules/history/historyModule.js" type="text/javascript"></script>
         <script src="app/modules/report/reportModule.js" type="text/javascript"></script>
+        <script src="app/common/filters.js" type="text/javascript"></script>
     </body>
 </html>

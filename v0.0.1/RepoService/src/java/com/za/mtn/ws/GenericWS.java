@@ -93,19 +93,45 @@ public class GenericWS {
     public Response wsdlParser(String data) throws MalformedURLException, IOException {
 
         String webPage = data;
-        String name = "wladmin";
-        String password = "Coca65Cola";
-
-        String authString = name + ":" + password;
+        //String name = "wladmin";
+        //String password = "Coca65Cola";
+        String user = null;
+        String password = null;
+        String searchUrl = null;
+         JSONObject j;
+        try {
+            j = new JSONObject(data);
+            user = j.getString("user");
+            password = j.getString("password");
+            searchUrl = j.getString("url");
+            System.out.println("auth user: " + user);
+            System.out.println("auth password: " + password);
+            System.out.println("auth searchUrl: " + searchUrl);
+        } catch (Exception ex) {
+            Logger.getLogger(GenericWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+        
+        String authString = user + ":" + password;
         System.out.println("auth string: " + authString);
         byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
         String authStringEnc = new String(authEncBytes);
         System.out.println("Base64 encoded auth string: " + authStringEnc);
 
-        URL url = new URL(webPage);
+        URL url = new URL(searchUrl);
         URLConnection urlConnection = url.openConnection();
-        urlConnection.setRequestProperty("Authorization", "Basic " + authStringEnc);
-        InputStream is = urlConnection.getInputStream();
+        if (!user.isEmpty() & !password.isEmpty()){
+             urlConnection.setRequestProperty("Authorization", "Basic " + authStringEnc);
+        }
+        InputStream is;
+        try{
+              is = urlConnection.getInputStream();
+        }catch(IOException ioe){
+            Logger.getLogger(GenericWS.class.getName()).log(Level.SEVERE, null, ioe);
+            
+            return Response.status(300).entity(ioe.getMessage()).build();
+        }
+       
 
         WSDLParser parser = new WSDLParser();
         WSDL wsdl = new WSDL();
@@ -284,7 +310,6 @@ public class GenericWS {
         arr.add("DELETE from message_structure  where operation_id=" + id );
         arr.add("DELETE from logic  where operation_id=" + id );
         arr.add("DELETE from relationship  where operation_id=" + id );
-        arr.add("DELETE from service_operation  where operation_id=" + id );
         arr.add("DELETE from operation  where id=" + id );
         
         cr.modifyDataTransactionMode(arr);

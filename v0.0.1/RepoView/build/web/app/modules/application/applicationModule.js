@@ -12,7 +12,7 @@ var applicationRepoModule = angular.module('applicationRepoModule', ['ngRoute'])
 // create the controller and inject Angular's $scope
 applicationRepoModule.controller('searchAppCtrl', function ($scope, $http, $rootScope) {
     // create a message to display in our view
-
+       $scope.searchValue = "%";
     $scope.applications = {};
 
     $scope.doSearch = function () {

@@ -6,7 +6,7 @@
         <div class="input-group">
             <input type="text" class="form-control" ng-model="searchValue"  placeholder="Search for project...">
             <span class="input-group-btn">
-                <button class="btn btn-default" ng-click="doSearch()" type="button">Go!</button>
+                <button class="btn btn-default" ng-click="doSearch()" tabindex="0" type="submit">Go!</button>
             </span>
         </div><!-- /input-group -->
           </div>
@@ -21,7 +21,7 @@
                 <p class="small">Search looks at tags and name. You can use % pre/post for a wildcard search  </p>
                 <div ng-repeat="operation in operations"  class="one-result">
 
-                    <a ng-href="#/operationEdit/Search/{{operation.id}}" class="large">{{operation.name}}</a>
+                    <a ng-href="#/operationEdit/{{operation.service_id}}/{{operation.id}}" class="large">{{operation.name}}</a>
                     <p>{{operation.description}}</p>
                 </div>
             </div>

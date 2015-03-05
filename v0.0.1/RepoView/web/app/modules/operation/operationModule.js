@@ -82,7 +82,7 @@ operationModule.controller('operationFieldsCtrl', function ($scope, $http, $root
 // create the controller and inject Angular's $scope
 operationModule.controller('searchOperationCtrl', function ($scope, $http, $rootScope) {
     // create a message to display in our view
-
+     $scope.searchValue = "%";
     $scope.doSearch = function () {
         // Simple POST request example (passing data) :
         $http.post('../RepoService/rest/data/anyQuery',
@@ -140,7 +140,7 @@ operationModule.service('OperationsManager', function ($http) {
         // Simple POST request example (passing data) :
 
         $http.post('../RepoService/rest/data/anyQuery',
-                {q: "select operation.id as id,operation.name as name,operation.description as description from operation,service_operation where operation.id = service_operation.operation_id and service_operation.service_id=" + id}
+                {q: "select operation.id as id,operation.name as name,operation.description as description from operation where  operation.service_id=" + id}
         )
                 .success(function (data, status, headers, config) {
                     console.info(data);
@@ -154,6 +154,9 @@ operationModule.service('OperationsManager', function ($http) {
                 });
     };
 });
+
+ 
+
 
 /************************************************/
 
@@ -302,31 +305,16 @@ operationModule.controller('newOperationCtrl', function ($scope, $routeParams, $
     
       $scope.service =  ServiceManager.get(serviceId) ;
       
+     
+    
+      if($scope.service === undefined || $scope.service === null || $scope.service === ""){
+             console.log(" editOperationCtrl calling list is null:");
+             ServiceManager.refresh(function(data){
+                  $scope.service = ServiceManager.get(serviceId); 
+             });
+           
+        }
 
-
-    function linkServiceToOperation(operaton_id, service_id) {
-
-        $http.post('../RepoService/rest/data/insert',
-                {service_operation: {
-                        service_id: service_id,
-                        operation_id: operaton_id
-                    }}
-        )
-
-                .success(function (data, status, headers, config) {
-                    console.info(data);
-                    $scope.operation.id = operaton_id;
-                    $window.alert('Operation created');
-
-
-                }).
-                error(function (data, status, headers, config) {
-                    console.info(data);
-                });
-
-
-
-    }
 
 
     $scope.save = function () {
@@ -338,29 +326,29 @@ operationModule.controller('newOperationCtrl', function ($scope, $routeParams, $
                         response_msg: $scope.operation.response_msg,
                         mep_type: $scope.operation.mep_type,
                         tags: $scope.operation.tags,
-                        description: $scope.operation.description
+                        description: $scope.operation.description,
+                        service_id: $scope.service.id
 
                     }}
         )
 
                 .success(function (data, status, headers, config) {
                     console.info(data);
-                    linkServiceToOperation(data, serviceId);
+                  
                     $scope.operation.id = data;
 
 
                     if ($scope.operation.id != 0) {
                         $scope.edit = true;
-                        //$location.path('/operationEdit/' + $scope.operation.id);
-                        $rootScope.globalMessage = 'Operation created!';
-                        // $window.alert('Operation created!');
+                        $window.alert('Operation created!!');
+                         history.back();
+                        
                     }
 
 
                 }).
                 error(function (data, status, headers, config) {
-                    console.info(data);
-                    $rootScope.globalMessage = 'Error creating Operation!';
+                     console.info(data);
                      $window.alert('Error creating Operation!');
                 });
     };
@@ -375,13 +363,21 @@ operationModule.controller('editOperationCtrl', function ($scope, $routeParams, 
     $scope.edit = true;
     
     $scope.service = {};
-    $scope.service =  ServiceManager.get($routeParams.serviceId) ;
     
-      if($scope.service === undefined || $scope.service === null ){
+    function getServiceFromOperation(){
+        $scope.service =  ServiceManager.get($scope.operation.service_id) ;
+    
+       if($scope.service === undefined || $scope.service === null || $scope.service === ""){
              console.log(" editOperationCtrl calling list is null:");
+             ServiceManager.refresh(function(data){
+                  $scope.service = ServiceManager.get($scope.operation.service_id); 
+             });
            
         }
-        
+    }
+    
+    
+
     
     $scope.mepType = function (type) {
         $scope.operation.mep_type = type;
@@ -389,12 +385,7 @@ operationModule.controller('editOperationCtrl', function ($scope, $routeParams, 
     };
 
     $scope.addRelation = function (type) {
-
-
-        $location.path('/operationRelation/' + operationId + '/' + type);
-
-        //$scope.application.domain = type;
-
+        $location.path('/operationRelation/' + $scope.service.id +'/'+ operationId + '/' + type);
     };
 
     getRulesList(operationId);
@@ -405,7 +396,7 @@ operationModule.controller('editOperationCtrl', function ($scope, $routeParams, 
     )
             .success(function (data, status, headers, config) {
                 $scope.operation = data[0];
-               
+               getServiceFromOperation();
                 console.info(data);
 
             }).

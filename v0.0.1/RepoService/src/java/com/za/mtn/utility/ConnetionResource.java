@@ -193,7 +193,7 @@ public class ConnetionResource {
             if (stmt != null) {
                 try {
                     stmt.close();
-                    conn.close();
+                    //conn.close();
                 } catch (SQLException ex) {
                     Logger.getLogger(ConnetionResource.class.getName()).log(Level.SEVERE, null, ex);
                 }

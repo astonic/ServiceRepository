@@ -11,7 +11,7 @@ var projectModule = angular.module('projectModule', ['ngRoute']);
 // create the controller and inject Angular's $scope
 projectModule.controller('searchProjectCtrl', function ($scope, $http, $rootScope) {
     // create a message to display in our view
-
+       $scope.searchValue = "%";
     $scope.projects = {};
 
     $scope.doSearch = function () {

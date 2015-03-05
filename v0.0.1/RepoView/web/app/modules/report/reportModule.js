@@ -77,9 +77,9 @@ reportModule.controller('reportCtrl', function ($scope, $http, $rootScope) {
                 });
     }
      
-     $scope.top10Reused = {};
+      $scope.top10Reused = {};
       $scope.top10Reused.lables = [];
-   $scope.top10Reused.data = [];
+      $scope.top10Reused.data = [];
     
      
      
@@ -184,8 +184,8 @@ reportModule.controller('reportCtrl', function ($scope, $http, $rootScope) {
        ['Component', 'count']
       
       ];
-      
-      
+     
+      //$scope.$emit('LOAD');  
         top10ReusedFunction();
         top10ProvidersFunction();
         servicesPerProjectFunction();
@@ -195,7 +195,8 @@ reportModule.controller('reportCtrl', function ($scope, $http, $rootScope) {
         serviceCount();
         applicationCount();
         projectCount();
-
+      
+       
     };
      
      

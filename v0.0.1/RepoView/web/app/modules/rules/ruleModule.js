@@ -9,17 +9,56 @@ var ruleModule = angular.module('ruleModule', ['ngRoute']);
 
 /*********************************************************/
 
-ruleModule.controller('ruleNewCtrl', function ($scope, $routeParams, $http, $rootScope, $window, OperationsManager) {
+ruleModule.controller('ruleNewCtrl', function ($scope, $routeParams, $http, $rootScope, $window, OperationsManager,ServiceManager) {
 
     var operationId = $routeParams.operationId;
-    $scope.operation = OperationsManager.get(operationId);
+    var serviceId = $routeParams.serviceId;
     $scope.edit = false;
     $scope.rule = {};
     $scope.rule.type = "Business Rule";
+    
+    
+    
+    
+    $scope.operation = OperationsManager.get(operationId);
+    $scope.service = ServiceManager.get(serviceId);
+
+     if($scope.service === undefined || $scope.service === null || $scope.service === ""){
+             console.log(" ruleNewCtrl calling list is null:");
+             ServiceManager.refresh(function(data){
+                  $scope.service = ServiceManager.get(serviceId); 
+                   console.log("Now  ServiceManager:"  );
+                   console.log($scope.operation  );
+                   
+             });
+           
+        }
+        
+
+
+      if($scope.operation === undefined || $scope.operation === null || $scope.operation === ""){
+             console.log(" ruleNewCtrl calling list is null:");
+             OperationsManager.refresh(serviceId,function(data){
+                  $scope.operation = OperationsManager.get(operationId); 
+                   console.log("Now  $scope.operation:"  );
+                   console.log($scope.operation  );
+                   
+             });
+           
+        }
+    
+    
+    
+    
+    
     $scope.ruleType = function (type) {
         $scope.rule.type = type;
 
     };
+    
+    
+    
+    
 
     $scope.save = function () {
         // Simple POST request example (passing data) :

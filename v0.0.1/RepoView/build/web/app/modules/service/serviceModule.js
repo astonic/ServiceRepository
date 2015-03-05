@@ -62,6 +62,7 @@ serviceModule.controller('serviceCtrl', function ($scope, $routeParams, $http, $
                         status: $scope.service.status,
                         description: $scope.service.description,
                         project_id: $scope.service.project_id
+                       
 
                     }}
         )
@@ -183,7 +184,8 @@ serviceModule.controller('updateServiceCtrl', function ($scope, $location, $rout
                         uri: $scope.service.uri,
                         status: $scope.service.status,
                         description: $scope.service.description,
-                        project_id: $scope.service.project_id
+                        project_id: $scope.service.project_id,
+                        environment:$scope.service.environment
 
                     }}
         )
@@ -322,6 +324,28 @@ serviceModule.service('ServiceManager', function ($http) {
          
        
     };
+    
+      this.refreshWithOperations = function (callBack) {
+
+        // Simple POST request example (passing data) :
+
+        $http.post('../RepoService/rest/data/anyQuery',
+                {q: 'Select * from service'}
+        )
+                .success(function (data, status, headers, config) {
+                    
+                    callBack(data);
+
+                }).
+                error(function (data, status, headers, config) {
+                    console.info(data);
+                });
+         
+       
+    };
+    
+    
+    
     this.refresh(this.setList);
 
 
@@ -363,18 +387,22 @@ serviceModule.controller('wsdlParserCtrl', function ($scope, $http, $rootScope, 
     
     $scope.doSearch = function(){
         
-        
+        $scope.$emit('LOAD');
           $http.post('../RepoService/rest/data/wsdlparser',
-                 $scope.searchValue
+                 $scope.wsdlWiz
         )
                 .success(function (data, status, headers, config) {
                     console.info(data);
                     $scope.service = data
                    // callBack(data);
+                   $scope.$emit('UNLOAD');
 
                 }).
                 error(function (data, status, headers, config) {
-                      $window.alert('Error: make sure the URL does not require authentication!');  
+                    console.info(data);
+                     $scope.$emit('UNLOAD');  
+                    $window.alert(data);  
+                      
                 });       
         
         

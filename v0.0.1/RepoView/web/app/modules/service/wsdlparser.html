@@ -8,16 +8,30 @@
      </div>
 
      <div class="panel-body">
-         
-          <div class="input-group">
+         <div class="well">
+              <small>If your WSDL requires authentication</small>
+              <div class="row">
+                  <div class="col-md-6">
+                        <input type="text" class="form-control" ng-model="wsdlWiz.user"  placeholder="user">
+                  </div>
+                  <div class="col-md-6">
+                      <input type="password" class="form-control" ng-model="wsdlWiz.password"  placeholder="password">
+                  </div>
+              </div>
+            <br>
+            <div class="input-group">
 
-            <input type="text" class="form-control" ng-model="searchValue"  placeholder="WSDL url...">
+            <input type="text" class="form-control" ng-model="wsdlWiz.url"  placeholder="WSDL url...">
             <span class="input-group-btn">
                 <button class="btn btn-default" ng-click="doSearch()" type="button">Submit!</button>
             </span>
            
-        </div><!-- /input-group -->
-         <small>Wizard allows you to use a WSDL URL to capture a service</small>
+        </div><!-- /input-group -->  
+        <small>Wizard allows you to use a WSDL URL to capture a service</small>
+         </div>
+          
+        
+         
          <hr>
          <br>
          <div class="row">

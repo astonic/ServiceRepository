@@ -92,7 +92,7 @@ homeModule.controller('homeCtrl', function ($scope, $http, $rootScope) {
 homeModule.controller('loginCtrl', function ($scope, $http, $rootScope, $window, $location) {
 
     $scope.tryLogin = function () {
-        if ($scope.userpass == "relax") {
+        if ($scope.userpass == "update") {
             $window.sessionStorage["update"] = true;
             $rootScope.update = true;
             $window.alert('You are in!');
@@ -112,4 +112,19 @@ homeModule.controller('logOutCtrl', function ($scope, $http, $rootScope, $window
     $window.sessionStorage["update"] = null;
     $rootScope.update = false;
 
+});
+
+/*********************************************************/
+// create the controller and inject Angular's $scope
+homeModule.controller('appCtrl', function ($scope) {
+
+  $scope.$on('LOAD',function(){
+     $scope.loading = true;
+     
+  });
+   $scope.$on('UNLOAD',function(){
+     $scope.loading = false;
+     
+  });
+   
 });

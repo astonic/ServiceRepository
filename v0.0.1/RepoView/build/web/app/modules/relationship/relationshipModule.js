@@ -10,15 +10,42 @@ var relationshipModule = angular.module('relationshipModule', ['ngRoute']);
 /**********************************************/
 
 
-relationshipModule.controller('linkRelationCtrl', function ($scope, $routeParams, $http, $window, OperationsManager) {
+relationshipModule.controller('linkRelationCtrl', function ($scope, $routeParams, $http, $window, OperationsManager,ServiceManager) {
 
     var operationId = $routeParams.operationId;
+    var serviceId = $routeParams.serviceId;
     var relation = $routeParams.relationship;
     console.info('OperationId: '+ operationId);
     
-   
+   $scope.searchValue = "%";
     
     $scope.operation = OperationsManager.get(operationId);
+    $scope.service = ServiceManager.get(serviceId);
+
+     if($scope.service === undefined || $scope.service === null || $scope.service === ""){
+             console.log(" linkRelationCtrl calling list is null:");
+             ServiceManager.refresh(function(data){
+                  $scope.service = ServiceManager.get(serviceId); 
+                   console.log("Now  ServiceManager:"  );
+                   console.log($scope.operation  );
+                   
+             });
+           
+        }
+        
+
+
+      if($scope.operation === undefined || $scope.operation === null || $scope.operation === ""){
+             console.log(" linkRelationCtrl calling list is null:");
+             OperationsManager.refresh(serviceId,function(data){
+                  $scope.operation = OperationsManager.get(operationId); 
+                   console.log("Now  $scope.operation:"  );
+                   console.log($scope.operation  );
+                   
+             });
+           
+        }
+        
 
     $scope.operationId = operationId;
     $scope.relation = relation;

@@ -1,5 +1,11 @@
+  <ol class="breadcrumb">
+       <li><a ng-href="#/" ><strong></strong>/Home</a></li>                
+      <li><a ng-href="#/serviceEdit/{{service.id}}" >Service: {{service.name}}</a></li>
+                      <li> <a ng-href="#/operationEdit/{{service.id}}/{{operation.id}}" >Operation:{{operation.name}}</a></li>
+                  </ol>  
+
 <div class="panel  panel-default">
-            <div class="panel-heading">Rule Details <a  ng-href="#/serviceEdit/{{service.id}}"> <span class="label label-warning"> /{{operation.name}}</span></a> </div>
+            <div class="panel-heading">Rule Details</div>
             <div class="panel-body">
                 <form class="form-horizontal bootstrap-validator-form ng-pristine ng-valid" id="defaultForm" novalidate="novalidate">
                     <fieldset>

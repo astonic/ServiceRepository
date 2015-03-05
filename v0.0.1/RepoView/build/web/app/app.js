@@ -6,7 +6,7 @@
 
 
 
-var repo = angular.module('repo', ['ngRoute','googlechart','reportModule','homeModule','serviceModule','operationModule','applicationRepoModule','projectModule','relationshipModule','ruleModule','directiveModule','historyModule','ui.bootstrap']);
+var repo = angular.module('repo', ['ngRoute','customFilters','googlechart','reportModule','homeModule','serviceModule','operationModule','applicationRepoModule','projectModule','relationshipModule','ruleModule','directiveModule','historyModule','ui.bootstrap']);
 
 // configure our routes
 repo.config(function ($routeProvider) {
@@ -49,7 +49,7 @@ repo.config(function ($routeProvider) {
                 controller: 'ruleEditCtrl'
             })
             // route for the about page
-            .when('/ruleNew/:operationId', {
+            .when('/ruleNew/:serviceId/:operationId', {
                 templateUrl: 'app/modules/rules/rules.html',
                 controller: 'ruleNewCtrl'
             })
@@ -104,7 +104,7 @@ repo.config(function ($routeProvider) {
                 templateUrl: 'app/modules/operation/operation.html',
                 controller: 'newOperationCtrl'
             })
-            .when('/operationRelation/:operationId/:relationship', {
+            .when('/operationRelation/:serviceId/:operationId/:relationship', {
                 templateUrl: 'app/modules/relationship/link.html',
                 controller: 'linkRelationCtrl'
             })
@@ -117,6 +117,7 @@ repo.config(function ($routeProvider) {
                 templateUrl: 'app/modules/operation/operation.html',
                 controller: 'editOperationCtrl'
             })
+           
             .when('/report', {
                 templateUrl: 'app/modules/report/report.html',
                 controller: 'reportCtrl'

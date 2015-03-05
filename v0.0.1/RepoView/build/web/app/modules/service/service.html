@@ -1,15 +1,16 @@
-
+ <ol class="breadcrumb">
+                       <li><a ng-href="#/" ><strong></strong>/Home</a></li>     
+                      
+                  </ol>
 
         <div class="panel panel-default ">
-            <div class="panel-heading">Service Details {{service.id}}</div>
+            <div class="panel-heading">Service Details</div>
             <div class="panel-body">
 
-                <p><strong>Service Name: </strong>{{service.name}}</p>
-
-
+                
                 <tabset>
                     <tab heading="Service Details">
-
+                        <br>
                         <div class="alert alert-warning alert-dismissible" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <strong>Warning! </strong>Quotes will be removes from description texts.
@@ -17,7 +18,13 @@
 
                         <form id="defaultForm"  class="form-horizontal bootstrap-validator-form" novalidate="novalidate">
                             <fieldset>
+                                 <div class="form-group">
+                                    <label class="col-sm-3 control-label">Service Name</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" ng-model="service.name" class="form-control" tabindex="4"  placeholder="service name" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip for name" required>
 
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Project</label>
                                     <div class="col-sm-5">
@@ -75,13 +82,7 @@
                                     </div>
                                     <small class="help-block col-sm-offset-3 col-sm-9" style="display: none;"></small></div>
 
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Service Name</label>
-                                    <div class="col-sm-5">
-                                        <input type="text" ng-model="service.name" class="form-control" tabindex="4"  placeholder="service name" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip for name" required>
-
-                                    </div>
-                                </div>
+                               
 
 
                                 <div class="form-group">
@@ -97,6 +98,7 @@
                                                 <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="protocolType('FTP')">FTP</a></li>
                                                 <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="protocolType('FILE')">FILE</a></li>
                                                 <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="protocolType('HTTP')">HTTP</a></li>
+                                                <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="protocolType('HTTPS')">HTTPS</a></li>
                                                 <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="protocolType('DB')">DB</a></li>
                                             </ul>
                                         </div>
@@ -114,7 +116,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Environment </label>
                                     <div class="col-sm-5">
-                                        <input type="text" ng-model="service.evironment" class="form-control" tabindex="7" placeholder="DEV1,DEV2,DEV3" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip for name">
+                                        <input type="text" ng-model="service.environment" class="form-control" tabindex="7" placeholder="DEV1,DEV2,DEV3" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip for name">
                                     </div>
                                     <small class="help-block col-sm-offset-3 col-sm-9" >Accepted comma separated inputs: DEV1,DEV2,DEV3,DEV4,QA1,QA2,QA3,QA4</small>
                                 </div>
@@ -134,7 +136,7 @@
                                     <div class="col-sm-5">
                                         <input type="text" ng-model="service.uri"  class="form-control" name="website" tabindex="9"  placeholder="http://" data-original-title="" title="">
                                     </div>
-                                    <small class="help-block col-sm-offset-3 col-sm-9" >URL for WSDL or endpoint</small></div>
+                                    <small class="help-block col-sm-offset-3 col-sm-9" >URI for WSDL or endpoint</small></div>
 
 
                             </fieldset>
