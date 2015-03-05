@@ -1,0 +1,52 @@
+<div class="panel  panel-default">
+    <div class="panel-heading">Link to Operation  <a  ng-href="#/serviceEdit/{{service.id}}"> <span class="label label-warning"> /{{service.name}}</span></a> </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-6">
+
+
+                <h4> Add a <span class="label label-default">{{relation}}</span> relationship to {{operation.name}} </h4>
+
+                <div class="input-group">
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{searchTypeValue}} <span class="caret"></span></button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a ng-click="searchType('Service')">Service</a></li>
+                            <li><a ng-click="searchType('Application')">Application</a></li>
+                            <li><a ng-click="searchType('Operation')">Operation</a></li>
+                        </ul>
+                    </div><!-- /btn-group -->
+                    <input type="text" class="form-control"  ng-model="searchValue"  aria-label="...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" ng-click="search()" type="button"><i class="fa fa-search"></i>&nbsp;Search!</button>
+                    </span>
+
+                </div><!-- /input-group -->
+
+            </div><!-- /.col-lg-6 -->
+
+        </div><!-- /.row -->
+        <br>
+
+        <div class="row">
+            <div class="col-lg-6">
+
+                <ul class="list-group" >
+                    <li class="list-group-item"  ng-repeat="obj in list">
+                        <span >{{obj.name}}</span>
+
+                        <button type="button " ng-disabled="{{!$root.update}}" ng-click="link(obj.id, obj.name, searchTypeValue)" class="btn btn-primary btn-xs pull-right" aria-label="Left Align"> 
+                            <i class="fa fa-link fa-lg"></i> Link
+
+                        </button>
+                        <p><small>{{obj.description}}</small></p>
+
+                    </li>
+                </ul>
+
+                <a type="button"  class="btn btn-info pull-right"  href back-button><i class="fa fa-arrow-left"></i> Back</a>  
+            </div>
+
+        </div>
+    </div>
+</div>

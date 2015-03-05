@@ -1,0 +1,35 @@
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">Project Search</div>
+    <div class="panel-body">
+          <div class="row">
+          <div class="col-xs-6">
+        <div class="input-group">
+            <input type="text" class="form-control" ng-model="searchValue"  placeholder="Search for project...">
+            <span class="input-group-btn">
+                <button class="btn btn-default" ng-click="doSearch()" type="button">Go!</button>
+            </span>
+        </div><!-- /input-group -->
+          </div>
+        <div class="col-xs-6">
+               <a class="btn btn-primary pull-right" ng-href="#/projectNew"  > <i class="fa fa-plus"></i>&nbsp;New Project</a>
+        </div>
+          </div>
+        
+        <div class="row">
+
+          <div class="col-xs-10">
+        <p class="small">Search looks at tags and name. You can use % pre/post for a wildcard search  </p>
+        <div ng-repeat="project in projects"  class="one-result">
+
+            <a ng-href="#/projectEdit/{{project.id}}" class="large">{{project.name}}</a>
+            <p>{{project.description}}</p>
+        </div>
+    </div>
+        </div>
+
+
+    </div>
+
+</div> 

@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-xs-12">
+        
+       
+        <div class="panel panel-default">
+            
+            <div class="panel-body">
+                <h3><strong>Service Name: {{service.name}}</strong></h3>
+                <hr>
+                <h4>Service Details</h4>
+                <hr>
+               <p> <strong>Description: </strong>
+                {{service.description}}</p>
+                <p><strong> Service Status :</strong> {{service.status}}</p>
+                <p><strong> Service Type :</strong>{{service.service_type}}</p>
+                <p><strong> Service Protocol Type :</strong>{{service.protocol_type}}</p>
+                <p><strong> URL :</strong><a href="#">{{service.uri}}</a></p>
+                <p><strong> Documentation Location :</strong><a href="#">{{service.documentation_loc}}</a></p>
+            </div>
+            
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">Operation Details</div>
+            <div class="panel-body">
+               
+                
+                <div ng-repeat="operation in operations" >
+                    <h4><strong>{{$index+1}}. Operation Name: {{operation.name}}</strong></h4>
+                    <hr>
+                   <p> <strong>Description:</strong>
+                    {{operation.description}}</p>
+                   
+                    <hr>
+                  
+                        <fieldinfo   operation="operation"></fieldinfo>
+                        
+                         <ruleinfo   operation="operation"></ruleinfo>
+                        
+                        <relationshipinfo   operation="operation"></relationshipinfo>
+                        
+                        
+                        </div>
+                </div>
+            </div>
+        </div>
+   
+    
+</div>

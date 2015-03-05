@@ -1,0 +1,39 @@
+<div class="panel panel-default">
+  
+    <div class="panel-heading"> Service Search 
+    
+    </div>
+ 
+ 
+<div class="panel-body">
+      <div class="row">
+            <div class="col-md-6">
+          <input type="text"  ng-model="searchValue"  placeholder="Search for service...">
+            </div>
+            
+      
+        <div class="col-md-6">
+         <a class="btn btn-primary pull-right" ng-href="#/serviceNew"  ><i class="fa fa-plus"></i>&nbsp;New Service</a>
+        </div>
+            </div><!-- /input-group -->
+            
+<div class="row">
+
+    <div class="col-xs-10">
+        <p class="small">Search to limit the result</p>
+        <div ng-repeat="service in servicesws | filter:searchValue | orderBy:'name' "  class="panel panel-default">
+            <div class="panel-body one-result">
+            <a ng-href="#/serviceEdit/{{service.id}}" class="large">{{service.name}} | {{service.service_type}} <i class="fa fa-pencil-square-o" ></i> </a>
+            <p>{{service.description}}</p>
+            <small>{{service.uri}}</small>
+            <a ng-href="#/servicePrint/{{service.id}}" class="btn btn-sm pull-right">Print View</a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+    
+
+
+    

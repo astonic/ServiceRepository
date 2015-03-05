@@ -1,0 +1,147 @@
+
+
+        <div class="panel  panel-default">
+            <div class="panel-heading">Operation Details  <a  ng-href="#/serviceEdit/{{service.id}}"> <span class="label label-warning"> /{{service.name}}</span></a> </div>
+            <div class="panel-body">
+                  <p><strong>Operation Name: </strong>{{operation.name}}</p>
+                
+                <tabset>
+    <tab heading="Operation Details">
+          <form id="defaultForm"  class="form-horizontal bootstrap-validator-form" novalidate="novalidate">
+                    <fieldset>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">MEP Type</label>
+                            <div class="col-sm-5">
+                                <div class="dropdown">
+                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"  >
+                                        {{operation.mep_type}}
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="mepType('Asynch')">Asynch</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="mepType('Synch')">Synch</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <small class="help-block col-sm-offset-3 col-sm-9" style="display: none;"></small></div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Operation Name</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" ng-model="operation.name"  placeholder="operation name" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip for name">
+
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Description</label>
+                            <div class="col-sm-5">
+                                <textarea  class="form-control" ng-model="operation.description" name="desc" data-original-title="" title="" ></textarea>
+                            </div>
+                            <small class="help-block col-sm-offset-3 col-sm-9" style="display: none;"></small></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Flow Diagram:</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" ng-model="operation.flow_diagram" data-original-title="" title="">
+                            </div>
+                            <small class="help-block col-sm-offset-3 col-sm-9" style="display: none;"></small></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Request sample</label>
+                            <div class="col-sm-5">
+                                <textarea  class="form-control" ng-model="operation.request_msg"  name="color" data-original-title="" title=""></textarea>
+                            </div>
+                            <small class="help-block col-sm-offset-3 col-sm-9" style="display: none;"></small></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Response sample</label>
+                            <div class="col-sm-5">
+                                <textarea  class="form-control" ng-model="operation.response_msg"  data-original-title="" title=""></textarea>
+                            </div>
+                            <small class="help-block col-sm-offset-3 col-sm-9" style="display: none;"></small></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Tags</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" ng-model="operation.tags"  placeholder="tags" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip for name">
+
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="">
+                        <button type="button" ng-disabled="{{!$root.update}}"  ng-click="delete()" ng-show="{{edit}}" class="btn btn-danger"><i class="fa fa-trash-o fa-lg"></i> Delete</button>
+                        <button type="button" ng-disabled="{{!$root.update}}" ng-click="save()" ng-show="{{!edit}}" class="btn btn-info"><i class="fa fa-save fa-lg"></i> Save</button>
+                        <button type="button" ng-disabled="{{!$root.update}}" ng-click="update()" ng-show="{{edit}}"  class="btn btn-info"><i class="fa fa-pencil fa-lg"></i> Update</button>
+                        <a type="button" ng-disabled="{{!$root.update}}" ng-href="#/operationFields/{{operation.id}}" ng-show="{{edit}}"  class="btn btn-info"><i class="fa fa-cogs fa-lg"></i> Fields</a>
+                        <a type="button"  class="btn btn-info pull-right"  href back-button><i class="fa fa-arrow-left"></i> Back</a>
+                    </div>
+                </form>
+    </tab>
+    <tab heading="Logic and Business Rules">
+         <a ng-show="{{edit}}"  class="btn btn-primary pull-right" ng-href="#/ruleNew/{{operation.id}}" ><i class="fa fa-plus"></i>&nbsp;New Rules</a>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Short Desc</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="rule in rules">
+                            <td><a  ng-href="#/ruleEdit/{{rule.id}}" >{{rule.type}}</a> </td>
+                            <td>{{rule.description}}</td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+    </tab>
+    <tab heading="Relationships">
+        <div ng-show="{{edit}}" class="dropdown pull-right">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                        <i class="fa fa-plus"></i>&nbsp; Add Relationship
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                        <li role="presentation"><a tabindex="-1" role="menuitem" ng-click="addRelation('Provided by')">Provided by</a></li>
+                        <li role="presentation"><a tabindex="-1" role="menuitem" ng-click="addRelation('Consumed by')">Consumed by</a></li>
+                    </ul>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Relationship</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr ng-repeat="relationship in relationships">
+                            <td>{{relationship.component_name}} </td>
+                            <td>{{relationship.component_type}}</td>
+                            <td>{{relationship.relationship_type}}</td>
+                            <td>
+                                <button type="button "  ng-click="removeRelationship(relationship.id)" class="btn btn-danger btn-xs pull-right" aria-label="Left Align">
+                                    <i class="fa fa-trash-o"></i> Delete
+
+                                </button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+    </tab>
+  </tabset>
+                
+                
+                
+                
+                
+                
+         
