@@ -1,0 +1,80 @@
+
+
+   
+
+ <div class="panel panel-default">
+     <div class="panel-heading">
+        WSDL Wizard 
+     </div>
+
+     <div class="panel-body">
+         <div class="well">
+              <small>If your WSDL requires authentication</small>
+              <div class="row">
+                  <div class="col-md-6">
+                        <input type="text" class="form-control" ng-model="wsdlWiz.user"  placeholder="user">
+                  </div>
+                  <div class="col-md-6">
+                      <input type="password" class="form-control" ng-model="wsdlWiz.password"  placeholder="password">
+                  </div>
+              </div>
+            <br>
+            <div class="input-group">
+
+            <input type="text" class="form-control" ng-model="wsdlWiz.url"  placeholder="WSDL url...">
+            <span class="input-group-btn">
+                <button class="btn btn-default" ng-click="doSearch()" type="button">Submit!</button>
+            </span>
+           
+        </div><!-- /input-group -->  
+        <small>Wizard allows you to use a WSDL URL to capture a service</small>
+         </div>
+          
+        
+         
+         <hr>
+         <br>
+         <div class="row">
+  
+    <div class="col-xs-3">
+        <h3> <strong>Service Name:</strong> {{service.name}}</h3>    
+    </div>
+    <div class="col-xs-4">
+        <textarea type="text" ng-show="service.name" cols="80" rows="5" ng-model="service.description"></textarea>
+    </div>
+         </div>
+         
+         
+         <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Operation Name</th>
+                            <th>Description</th>
+                            <th>    </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr ng-repeat="operation in service.operations">
+                            <td>{{operation.name}} </td>
+                            <td><textarea type="text" cols="80" ng-model="operation.description"></textarea> </td>
+                            <td></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+</div>
+   
+     
+<div class="panel-footer">
+         <div class="row">
+    <div class="col-xs-12">
+         <button type="button" tabindex="12" ng-show="service.name" ng-click="save()"   class="btn btn-info">  <i class="fa fa-pencil"></i>Save</button>
+                        <a   class="btn btn-info pull-right"  href back-button><i class="fa fa-arrow-left"></i> Back</a>
+                        
+    </div>
+    
+</div>
+     </div>
+ </div>
