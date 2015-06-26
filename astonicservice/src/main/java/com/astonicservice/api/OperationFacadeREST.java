@@ -5,13 +5,19 @@
  */
 package com.astonicservice.api;
 
+import com.astonicservice.entity.History;
+import com.astonicservice.entity.Logic;
 import com.astonicservice.entity.Operation;
+import com.astonicservice.entity.Relationship;
+import com.astonicservice.entity.Service;
 import com.rest.astonicservice.jpa.EntityManagerUtil;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -52,7 +58,13 @@ public class OperationFacadeREST extends AbstractFacade<Operation> {
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {
-        super.remove(super.find(id));
+        
+        Operation o = super.find(id);
+        super.find(id).getServiceId().getOperationCollection().remove(o);
+        //super.remove(o.getServiceId());
+        //o.setServiceId(null);
+        //super.edit(o);
+        super.remove(o);
     }
 
     @GET
@@ -61,6 +73,35 @@ public class OperationFacadeREST extends AbstractFacade<Operation> {
     public Operation find(@PathParam("id") Integer id) {
         return super.find(id);
     }
+    
+    
+    
+    @GET
+    @Path("{id}/relationship")
+    @Produces({"application/xml", "application/json"})
+    public Collection<Relationship> findRelationship(@PathParam("id") Integer id) {
+        return super.find(id).getRelationshipCollection();
+    }
+    
+    @GET
+    @Path("{id}/logic")
+    @Produces({"application/xml", "application/json"})
+    public Collection<Logic> findLogic(@PathParam("id") Integer id) {
+        return super.find(id).getLogicCollection();
+    }
+    
+    
+    
+    @GET
+    @Path("/name/{name}")
+    @Produces({"application/xml", "application/json"})
+    public List<Operation> findRelationship(@PathParam("name") String name) {
+       return super.findbyField("Operation","name",name);
+    }
+    
+   
+    
+   
 
     @GET
     @Override

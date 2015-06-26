@@ -18,13 +18,11 @@ homeModule.controller('homeCtrl', function ($scope, $http, $rootScope) {
     projectCount();
 
     function projectCount() {
-        $http.post('../RepoServiceV1/rest/data/anyQuery',
-                {q: 'Select count(*) as total from project'}
-        )
+        $http.get('../api/project/count')
 
                 .success(function (data, status, headers, config) {
                     console.info(data);
-                    $scope.projectTotal = data[0].total;
+                    $scope.projectTotal = data;
 
                 }).
                 error(function (data, status, headers, config) {
@@ -34,13 +32,11 @@ homeModule.controller('homeCtrl', function ($scope, $http, $rootScope) {
 
 
     function operationCount() {
-        $http.post('../RepoService/rest/data/anyQuery',
-                {q: 'Select count(*) as total from operation'}
-        )
+        $http.get('../api/operation/count')
 
                 .success(function (data, status, headers, config) {
                     console.info(data);
-                    $scope.operationTotal = data[0].total;
+                    $scope.operationTotal = data;
 
                 }).
                 error(function (data, status, headers, config) {
@@ -49,13 +45,11 @@ homeModule.controller('homeCtrl', function ($scope, $http, $rootScope) {
     }
 
     function serviceCount() {
-        $http.post('../RepoService/rest/data/anyQuery',
-                {q: 'Select count(*) as total from service'}
-        )
+        $http.get('../api/service/count')
 
                 .success(function (data, status, headers, config) {
                     console.info(data);
-                    $scope.serviceTotal = data[0].total;
+                    $scope.serviceTotal = data;
 
                 }).
                 error(function (data, status, headers, config) {
@@ -64,13 +58,11 @@ homeModule.controller('homeCtrl', function ($scope, $http, $rootScope) {
     }
 
     function applicationCount() {
-        $http.post('../RepoService/rest/data/anyQuery',
-                {q: 'Select count(*) as total from application'}
-        )
+        $http.get('../api/application/count')
 
                 .success(function (data, status, headers, config) {
                     console.info(data);
-                    $scope.applicationTotal = data[0].total;
+                    $scope.applicationTotal = data;
 
                 }).
                 error(function (data, status, headers, config) {

@@ -95,7 +95,9 @@ directiveModule.directive('relationshipinfo', function() {
         
         $scope.getRelationships = function(id){
         RelationshipManager.refresh(id,function(data){
+            
             $scope.relationships = data;
+            
         });
     };
         

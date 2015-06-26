@@ -74,9 +74,7 @@ relationshipModule.controller('linkRelationCtrl', function ($scope, $routeParams
 
     function searchServices() {
         // Simple POST request example (passing data) :
-        $http.post('../RepoService/rest/data/anyQuery',
-                {q: 'Select id, name as name, description from service where name like "' + $scope.searchValue + '" or tags like "' + $scope.searchValue + '"'}
-        )
+        $http.get('../api/service/name/'+ $scope.searchValue)
 
                 .success(function (data, status, headers, config) {
                     console.info(data);
@@ -90,9 +88,7 @@ relationshipModule.controller('linkRelationCtrl', function ($scope, $routeParams
 
     function searchApplications() {
         // Simple POST request example (passing data) :
-        $http.post('../RepoService/rest/data/anyQuery',
-                {q: 'Select * from application where name like "' + $scope.searchValue + '"'}
-        )
+         $http.get('../api/application/name/'+ $scope.searchValue)
 
                 .success(function (data, status, headers, config) {
                     console.info(data);
@@ -106,9 +102,7 @@ relationshipModule.controller('linkRelationCtrl', function ($scope, $routeParams
 
     function searchOperations() {
         // Simple POST request example (passing data) :
-        $http.post('../RepoService/rest/data/anyQuery',
-                {q: 'Select * from operation where name like "' + $scope.searchValue + '"'}
-        )
+        $http.get('../api/operation/name/'+ $scope.searchValue)
 
                 .success(function (data, status, headers, config) {
                     console.info(data);
@@ -124,15 +118,15 @@ relationshipModule.controller('linkRelationCtrl', function ($scope, $routeParams
 
     function sendLinkData(id, comp_name, type) {
 
-        $http.post('../RepoService/rest/data/insert',
-                {relationship: {
-                        operation_id: operationId,
-                        relationship_type: $scope.relation,
-                        relationship_id: id,
-                        component_name: comp_name,
-                        component_type: type
+        $http.post('../api/relationship',
+           {
+                        operationId: {id:operationId},
+                        relationshipType: $scope.relation,
+                        relationshipId: id,
+                        componentName: comp_name,
+                        componentType: type
 
-                    }}
+                    }
         )
 
                 .success(function (data, status, headers, config) {
@@ -181,12 +175,10 @@ relationshipModule.service('RelationshipManager', function ($http) {
 
         // Simple POST request example (passing data) :
 
-        $http.post('../RepoService/rest/data/anyQuery',
-                {q: "select * from relationship where operation_id = " + id}
-        )
+        $http.get('../api/operation/' + id + '/relationship')
                 .success(function (data, status, headers, config) {
                     console.info(data);
-                    list = data;
+                        list = data;
                     callBack(data);
 
                 }).

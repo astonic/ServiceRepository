@@ -12,10 +12,10 @@
                <p> <strong>Description: </strong>
                 {{service.description}}</p>
                 <p><strong> Service Status :</strong> {{service.status}}</p>
-                <p><strong> Service Type :</strong>{{service.service_type}}</p>
-                <p><strong> Service Protocol Type :</strong>{{service.protocol_type}}</p>
+                <p><strong> Service Type :</strong>{{service.serviceType}}</p>
+                <p><strong> Service Protocol Type :</strong>{{service.protocolType}}</p>
                 <p><strong> URL :</strong><a href="#">{{service.uri}}</a></p>
-                <p><strong> Documentation Location :</strong><a href="#">{{service.documentation_loc}}</a></p>
+                <p><strong> Documentation Location :</strong><a href="#">{{service.documentationLoc}}</a></p>
             </div>
             
         </div>
@@ -31,8 +31,18 @@
                     {{operation.description}}</p>
                    
                     <hr>
+                    <p> <strong>Request Message:</strong>
+                    <pre>{{operation.requestMsg}} </pre></p>
+                   
+                    <hr>
+                    <p> <strong>Response Message:</strong>
+                    <pre>{{operation.responseMsg}}</pre></p>
+                   
+                    <hr>
+                    
                   
-                        <fieldinfo   operation="operation"></fieldinfo>
+                        <!-- <fieldinfo   operation="operation"></fieldinfo> -->
+                         
                         
                          <ruleinfo   operation="operation"></ruleinfo>
                         

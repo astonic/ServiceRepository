@@ -1,4 +1,4 @@
-/* 
+/*  
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -16,9 +16,7 @@ projectModule.controller('searchProjectCtrl', function ($scope, $http, $rootScop
 
     $scope.doSearch = function () {
         // Simple POST request example (passing data) :
-        $http.post('../RepoService/rest/data/anyQuery',
-                {q: 'Select * from project where name like "' + $scope.searchValue + '"'}
-        )
+        $http.get('../api/project/name/' + $scope.searchValue)
 
                 .success(function (data, status, headers, config) {
                     console.info(data);
@@ -48,12 +46,12 @@ projectModule.controller('projectNewCtrl', function ($scope, $http, $location, $
 
     $scope.save = function () {
         // Simple POST request example (passing data) :
-        $http.post('../RepoService/rest/data/insert',
-                {project: {
+        $http.post('../api/project',
+                {
                         name: $scope.project.name,
                         description: $scope.project.description,
-                        project_documentation: $scope.project.project_documentation
-                    }}
+                        projectDocumentation: $scope.project.project_documentation
+                    }
         )
 
                 .success(function (data, status, headers, config) {
@@ -83,11 +81,10 @@ projectModule.controller('projectEditCtrl', function ($scope, $http, $location, 
 
 
 
-    $http.post('../RepoService/rest/data/anyQuery',
-            {q: "Select * from project where id=" + projectId}
+    $http.get('../api/project/'+ projectId
     )
             .success(function (data, status, headers, config) {
-                $scope.project = data[0];
+                $scope.project = data;
                 console.info(data);
 
             }).
@@ -99,14 +96,14 @@ projectModule.controller('projectEditCtrl', function ($scope, $http, $location, 
 
     $scope.update = function () {
         // Simple POST request example (passing data) :
-        $http.post('../RepoService/rest/data/update',
-                {project: {
+        $http.put('../api/project/'+ $scope.project.id ,
+                {
                         id: $scope.project.id,
                         name: $scope.project.name,
                         description: $scope.project.description,
-                        project_documentation: $scope.project.project_documentation
+                        projectDocumentation: $scope.project.projectDocumentation
 
-                    }}
+                   }
         )
 
                 .success(function (data, status, headers, config) {
@@ -126,11 +123,7 @@ projectModule.controller('projectEditCtrl', function ($scope, $http, $location, 
 
     $scope.delete = function (id) {
         console.info("remove " + id);
-        $http.post('../RepoService/rest/data/delete',
-                {project: {
-                        id: id
-                    }}
-        )
+        $http.delete('../api/project/' + id )
 
                 .success(function (data, status, headers, config) {
                     console.info(data);
@@ -176,8 +169,7 @@ projectModule.service('ProjectManager', function ($http) {
 
         // Simple POST request example (passing data) :
 
-        $http.post('../RepoService/rest/data/anyQuery',
-                {q: "select * from project" }
+        $http.get('../api/project'
         )
                 .success(function (data, status, headers, config) {
                     console.info(data);

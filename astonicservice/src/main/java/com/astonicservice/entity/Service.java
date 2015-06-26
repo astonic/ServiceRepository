@@ -91,9 +91,9 @@ public class Service implements Serializable {
     @Column(name = "environment")
     private String environment;
     @JoinColumn(name = "project_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
     private Project projectId;
-    @OneToMany(mappedBy = "serviceId", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "serviceId", fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
     @Fetch(value = FetchMode.SUBSELECT)
     private Collection<History> historyCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "serviceId", fetch = FetchType.EAGER)

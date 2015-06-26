@@ -7,6 +7,8 @@ import javax.persistence.Persistence;
 
 public class EntityManagerUtil {
   private static final EntityManagerFactory entityManagerFactory;
+  
+  
   static {
     try {
       entityManagerFactory = Persistence.createEntityManagerFactory("test");
@@ -18,7 +20,10 @@ public class EntityManagerUtil {
   }
 
   public static EntityManager getEntityManager() {
-    return entityManagerFactory.createEntityManager();
+    
+      return entityManagerFactory.createEntityManager();
 
   }
+  
+  
 }

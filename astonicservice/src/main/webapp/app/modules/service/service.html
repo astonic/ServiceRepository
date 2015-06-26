@@ -21,7 +21,7 @@
                                  <div class="form-group">
                                     <label class="col-sm-3 control-label">Service Name</label>
                                     <div class="col-sm-5">
-                                        <input type="text" ng-model="service.name" class="form-control" tabindex="4"  placeholder="service name" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip for name" required>
+                                        <input type="text" tabindex="1" ng-model="service.name" class="form-control" tabindex="4"  placeholder="service name" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip for name" required>
 
                                     </div>
                                 </div>
@@ -29,7 +29,7 @@
                                     <label class="col-sm-3 control-label">Project</label>
                                     <div class="col-sm-5">
                                         <div class="dropdown">
-                                            <button class="btn btn-default dropdown-toggle" type="button" tabindex="1"    data-toggle="dropdown" >
+                                            <button  tabindex="2" class="btn btn-default dropdown-toggle" type="button" tabindex="1"    data-toggle="dropdown" >
                                                 {{project.name}}
                                                 <span class="caret"></span>
                                             </button>
@@ -49,7 +49,7 @@
                                     <label class="col-sm-3 control-label">Service Status</label>
                                     <div class="col-sm-5">
                                         <div class="dropdown">
-                                            <button class="btn btn-default dropdown-toggle" type="button" tabindex="2"    data-toggle="dropdown" >
+                                            <button tabindex="3" class="btn btn-default dropdown-toggle" type="button" tabindex="2"    data-toggle="dropdown" >
                                                 {{service.status}}
                                                 <span class="caret"></span>
                                             </button>
@@ -68,8 +68,8 @@
                                     <label class="col-sm-3 control-label">Service Type</label>
                                     <div class="col-sm-5">
                                         <div class="dropdown">
-                                            <button class="btn btn-default dropdown-toggle" type="button" tabindex="3"  data-toggle="dropdown">
-                                                {{service.service_type}}
+                                            <button tabindex="4" class="btn btn-default dropdown-toggle" type="button" tabindex="3"  data-toggle="dropdown">
+                                                {{service.serviceType}}
                                                 <span class="caret"></span>
                                             </button>
                                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
@@ -89,8 +89,8 @@
                                     <label class="col-sm-3 control-label">Protocol</label>
                                     <div class="col-sm-5">
                                         <div class="dropdown">
-                                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" tabindex="5"  data-toggle="dropdown"  >
-                                                {{service.protocol_type}}
+                                            <button tabindex="5" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" tabindex="5"  data-toggle="dropdown"  >
+                                                {{service.protocolType}}
                                                 <span class="caret"></span>
                                             </button>
                                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
@@ -108,7 +108,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Documentation Location</label>
                                     <div class="col-sm-5">
-                                        <input type="text" ng-model="service.documentation_loc" class="form-control" tabindex="6"  placeholder="docs location" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip for name">
+                                        <input type="text" tabindex="6" ng-model="service.documentationLoc" class="form-control" tabindex="6"  placeholder="docs location" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip for name">
 
                                     </div>
                                     <small class="help-block col-sm-offset-3 col-sm-9" >URL to Jazz or Sharepoint for more related documentation</small>
@@ -116,7 +116,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Environment </label>
                                     <div class="col-sm-5">
-                                        <input type="text" ng-model="service.environment" class="form-control" tabindex="7" placeholder="DEV1,DEV2,DEV3" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip for name">
+                                        <input type="text" tabindex="7" ng-model="service.environment" class="form-control" tabindex="7" placeholder="DEV1,DEV2,DEV3" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip for name">
                                     </div>
                                     <small class="help-block col-sm-offset-3 col-sm-9" >Accepted comma separated inputs: DEV1,DEV2,DEV3,DEV4,QA1,QA2,QA3,QA4</small>
                                 </div>
@@ -128,13 +128,13 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Description</label>
                                     <div class="col-sm-5">
-                                        <textarea  ng-model="service.description" class="form-control" tabindex="8"  name="email" data-original-title="" title="" ></textarea>
+                                        <textarea tabindex="8" ng-model="service.description" class="form-control" tabindex="8"  name="email" data-original-title="" title="" ></textarea>
                                     </div>
                                     <small class="help-block col-sm-offset-3 col-sm-9" style="display: none;"></small></div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">Endpoint</label>
                                     <div class="col-sm-5">
-                                        <input type="text" ng-model="service.uri"  class="form-control" name="website" tabindex="9"  placeholder="http://" data-original-title="" title="">
+                                        <input tabindex="9" type="text" ng-model="service.uri"  class="form-control" name="website" tabindex="9"  placeholder="http://" data-original-title="" title="">
                                     </div>
                                     <small class="help-block col-sm-offset-3 col-sm-9" >URI for WSDL or endpoint</small></div>
 
@@ -144,7 +144,7 @@
                                 <button type="button" tabindex="10"  ng-disabled="{{!$root.update}}" ng-click="delete()"  ng-show="{{edit}}" class="btn btn-danger">  <i class="fa fa-trash-o"></i> Delete</button>
                                 <button type="button" tabindex="11" ng-disabled="{{!$root.update}}" ng-click="save()" ng-show="{{!edit}}" class="btn btn-info"> <i class="fa fa-save"></i> Save</button>
                                 <button type="button" tabindex="12" ng-disabled="{{!$root.update}}" ng-click="update()" ng-show="{{edit}}"  class="btn btn-info">  <i class="fa fa-pencil"></i> Update</button>
-                                <a   class="btn btn-info pull-right"  href back-button><i class="fa fa-arrow-left"></i> Back</a>
+                                <a  tabindex="13" class="btn btn-info pull-right"  href back-button><i class="fa fa-arrow-left"></i> Back</a>
                             </div>
                         </form>
                      

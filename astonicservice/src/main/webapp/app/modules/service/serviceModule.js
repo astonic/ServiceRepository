@@ -16,8 +16,8 @@ serviceModule.controller('serviceCtrl', function ($scope, $routeParams, $http, $
 
     $scope.edit = false;
     $scope.service = {};
-    $scope.service.service_type = "OSB Service";
-    $scope.service.protocol_type = "WS";
+    $scope.service.serviceType = "OSB Service";
+    $scope.service.protocolType = "WS";
     $scope.service.status = "DESIGN";
     
     $scope.project = {};
@@ -36,12 +36,12 @@ serviceModule.controller('serviceCtrl', function ($scope, $routeParams, $http, $
     };
     
     $scope.componentType = function (type) {
-        $scope.service.service_type = type;
+        $scope.service.serviceType = type;
 
     };
 
     $scope.protocolType = function (type) {
-        $scope.service.protocol_type = type;
+        $scope.service.protocolType = type;
 
     };
 
@@ -52,19 +52,19 @@ serviceModule.controller('serviceCtrl', function ($scope, $routeParams, $http, $
 
     $scope.save = function () {
         // Simple POST request example (passing data) :
-        $http.post('../RepoService/rest/data/insert',
-                {service: {
+        $http.post('../api/service',
+                {
                         name: $scope.service.name,
-                        documentation_loc: $scope.service.documentation_loc,
-                        service_type: $scope.service.service_type,
-                        protocol_type: $scope.service.protocol_type,
+                        documentationLoc: $scope.service.documentationLoc,
+                        serviceType: $scope.service.serviceType,
+                        protocolType: $scope.service.protocolType,
                         uri: $scope.service.uri,
                         status: $scope.service.status,
                         description: $scope.service.description,
-                        project_id: $scope.service.project_id
+                        projectId:{ id: $scope.service.project_id}
                        
 
-                    }}
+                    }
         )
 
                 .success(function (data, status, headers, config) {
@@ -104,15 +104,15 @@ serviceModule.controller('updateServiceCtrl', function ($scope, $location, $rout
     $scope.edit = true;
     $scope.service = {};
     $scope.service.id = serviceId;
-    //getOperations(serviceId);
+    getOperations(serviceId);
     getHistory(serviceId);
     $scope.project = {};
 
      function getProjectInfoAfterServiceLoads(){
          ProjectManager.refresh(function (data) {
         $scope.projects = data;
-        if ($scope.service.project_id != null){
-        $scope.project.name = ProjectManager.get($scope.service.project_id).name;
+        if ($scope.service.projectId != null){
+        $scope.project.name = ProjectManager.get($scope.service.projectId.Id).name;
       }else{
         $scope.project.name = $scope.projects[0].name;
         $scope.service.project_id = $scope.projects[0].id;
@@ -121,16 +121,16 @@ serviceModule.controller('updateServiceCtrl', function ($scope, $location, $rout
     }
     
     // Simple POST request example (passing data) :
-    $http.post('../RepoService/rest/data/anyQuery',
-            {q: "Select * from service where id=" + serviceId}
+    $http.get('../api/service/'+ serviceId
     )
 
             .success(function (data, status, headers, config) {
                 // this callback will be called asynchronously
                 // when the response is available
-                $scope.service = data[0];
-                console.info(data);
-                getProjectInfoAfterServiceLoads();
+                $scope.service = data;
+                console.info($scope.service);
+                  $scope.project.name = $scope.service.projectId.name;
+                   $scope.service.project_id = $scope.service.projectId.id;
 
                 //$scope.servicesws  = data;
 
@@ -174,20 +174,20 @@ serviceModule.controller('updateServiceCtrl', function ($scope, $location, $rout
 
     $scope.update = function () {
         // Simple POST request example (passing data) :
-        $http.post('../RepoService/rest/data/update',
-                {service: {
+        $http.put('../api/service/'+serviceId ,
+                {
                         id: serviceId,
                         name: $scope.service.name,
-                        documentation_loc: $scope.service.documentation_loc,
-                        service_type: $scope.service.service_type,
-                        protocol_type: $scope.service.protocol_type,
+                        documentationLoc: $scope.service.documentation_loc,
+                        serviceType: $scope.service.service_type,
+                        protocolType: $scope.service.protocol_type,
                         uri: $scope.service.uri,
                         status: $scope.service.status,
                         description: $scope.service.description,
-                        project_id: $scope.service.project_id,
+                        projectId: { id:$scope.service.project_id},
                         environment:$scope.service.environment
 
-                    }}
+                    }
         )
 
                 .success(function (data, status, headers, config) {
@@ -205,27 +205,27 @@ serviceModule.controller('updateServiceCtrl', function ($scope, $location, $rout
 
     function getOperations(id) {
         // Simple POST request example (passing data) :
-        $http.post('../RepoService/rest/data/anyQuery',
-                {q: "select operation.id as id,operation.name as name,operation.description as description from operation,service_operation where operation.id = service_operation.operation_id and service_operation.service_id=" + id})
+        $http.get('../api/service/'+ id +'/operations')
 
                 .success(function (data, status, headers, config) {
-                    console.info(data);
+                    console.info("Operations "+ data);
                     $scope.operationws = data;
 
                 }).
                 error(function (data, status, headers, config) {
                     console.info(data);
                 });
-    }
-    ;
+    };
+    
+    
+    
 
     function getHistory(id) {
         // Simple POST request example (passing data) :
-        $http.post('../RepoService/rest/data/anyQuery',
-                {q: "select * from history where service_id=" + id})
+         $http.get('../api/service/'+ id +'/history')
 
                 .success(function (data, status, headers, config) {
-                    console.info(data);
+                    console.info("history: " + data);
                     $scope.historyList = data;
 
                 }).
@@ -237,9 +237,7 @@ serviceModule.controller('updateServiceCtrl', function ($scope, $location, $rout
     
     $scope.delete = function () {
         
-        $http.post('../RepoService/rest/data/serviceDelete',
-                {id: $scope.service.id}
-        )
+        $http.delete('../api/service/'+ $scope.service.id)
 
                 .success(function (data, status, headers, config) {
                     console.info(data);
@@ -309,9 +307,7 @@ serviceModule.service('ServiceManager', function ($http) {
 
         // Simple POST request example (passing data) :
 
-        $http.post('../RepoService/rest/data/anyQuery',
-                {q: 'Select * from service'}
-        )
+        $http.get('../api/service')
                 .success(function (data, status, headers, config) {
                     console.info(data);
                       serviceList = data;
@@ -329,9 +325,8 @@ serviceModule.service('ServiceManager', function ($http) {
 
         // Simple POST request example (passing data) :
 
-        $http.post('../RepoService/rest/data/anyQuery',
-                {q: 'Select * from service'}
-        )
+        $http.get('../api/service')
+        
                 .success(function (data, status, headers, config) {
                     
                     callBack(data);
@@ -343,8 +338,6 @@ serviceModule.service('ServiceManager', function ($http) {
          
        
     };
-    
-    
     
     this.refresh(this.setList);
 

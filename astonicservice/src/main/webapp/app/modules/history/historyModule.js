@@ -18,11 +18,10 @@ historyModule.controller('historyEditCtrl', function ($scope, $http, $location, 
         $scope.history.type = type;
     };
 
-    $http.post('../RepoService/rest/data/anyQuery',
-            {q: "Select * from history where id=" + historyId}
-    )
+    $http.get('../api/history/'+ historyId)
             .success(function (data, status, headers, config) {
-                $scope.history = data[0];
+                $scope.history = data;
+                
                 console.info(data);
 
             }).
@@ -34,18 +33,19 @@ historyModule.controller('historyEditCtrl', function ($scope, $http, $location, 
 
     $scope.update = function () {
         // Simple POST request example (passing data) :
-        $http.post('../RepoService/rest/data/update',
-                {history: {
+        $http.put('../api/history/' + $scope.history.id,
+                 {
                         id: $scope.history.id,
                         type: $scope.history.type,
-                        description: $scope.history.description
+                        description: $scope.history.description,
+                        serviceId:{id:$scope.history.serviceId.id}
 
-                    }}
+                    }
         )
 
                 .success(function (data, status, headers, config) {
                     console.info(data);
-                    $location.path('/serviceEdit/' + $scope.history.service_id);
+                    $location.path('/serviceEdit/' + $scope.history.serviceId.id);
                     $rootScope.globalMessage = 'History updated!';
                     $window.alert('History updated!');
 
@@ -60,11 +60,7 @@ historyModule.controller('historyEditCtrl', function ($scope, $http, $location, 
 
     $scope.delete = function (id) {
         console.info("remove " + id);
-        $http.post('../RepoService/rest/data/delete',
-                {history: {
-                        id: id
-                    }}
-        )
+        $http.delete('../api/history/'+ id)
 
                 .success(function (data, status, headers, config) {
                     console.info(data);
@@ -100,12 +96,12 @@ historyModule.controller('historyNewCtrl', function ($scope, $http, $location, $
 
     $scope.save = function () {
         // Simple POST request example (passing data) :
-        $http.post('../RepoService/rest/data/insert',
-                {history: {
+        $http.post('../api/history',
+                {
                         type: $scope.history.type,
                         description: $scope.history.description,
-                        service_id: $scope.history.service_id
-                    }}
+                        serviceId: {id: $scope.history.service_id}
+                 }
         )
 
                 .success(function (data, status, headers, config) {

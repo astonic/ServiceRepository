@@ -17,7 +17,7 @@ applicationRepoModule.controller('searchAppCtrl', function ($scope, $http, $root
 
     $scope.doSearch = function () {
         // Simple POST request example (passing data) :
-        $http.post('../RepoService/rest/data/anyQuery',
+        $http.get('../api/application',
                 {q: 'Select * from application where name like "' + $scope.searchValue + '" or description like "' + $scope.searchValue + '"'}
         )
 
@@ -49,11 +49,10 @@ applicationRepoModule.controller('editAppCtrl', function ($scope, $http, $routeP
         $scope.application.domain = type;
     };
     
-    $http.post('../RepoService/rest/data/anyQuery',
-            {q: "Select * from application where id=" + appId}
+    $http.get('../api/application/'+appId
     )
             .success(function (data, status, headers, config) {
-                $scope.application = data[0];
+                $scope.application = data;
                 console.info(data);
 
             }).
@@ -64,13 +63,14 @@ applicationRepoModule.controller('editAppCtrl', function ($scope, $http, $routeP
 
     $scope.update = function () {
         // Simple POST request example (passing data) :
-        $http.post('../RepoService/rest/data/update',
-                {application: {
+        $http.put('../api/application/'+$scope.application.id,
+                    {
                         id: $scope.application.id,
+                        name: $scope.application.name,
                         domain: $scope.application.domain,
                         description: $scope.application.description
 
-                    }}
+                    }
         )
 
                 .success(function (data, status, headers, config) {
@@ -87,12 +87,9 @@ applicationRepoModule.controller('editAppCtrl', function ($scope, $http, $routeP
     };
     
     
-        $scope.delete = function (id) {
-        console.info("remove " + id);
-        $http.post('../RepoService/rest/data/delete',
-                {application: {
-                        id: id
-                    }}
+        $scope.delete = function () {
+        console.info("remove " + $scope.application.id);
+        $http.delete('../api/application/' + $scope.application.id
         )
 
                 .success(function (data, status, headers, config) {
@@ -124,12 +121,12 @@ applicationRepoModule.controller('newAppCtrl', function ($scope, $http, $locatio
 
     $scope.save = function () {
         // Simple POST request example (passing data) :
-        $http.post('../RepoService/rest/data/insert',
-                {application: {
+        $http.post('../api/application',
+                {
                         name: $scope.application.name,
                         description: $scope.application.description,
                         domain: $scope.application.domain
-                    }}
+                    }
         )
 
                 .success(function (data, status, headers, config) {

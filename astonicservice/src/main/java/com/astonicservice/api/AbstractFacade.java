@@ -7,6 +7,7 @@ package com.astonicservice.api;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
@@ -17,26 +18,49 @@ public abstract class AbstractFacade<T> {
 
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
-    }
+    }  
 
     protected abstract EntityManager getEntityManager();
-
+   
     public void create(T entity) {
+        getEntityManager().getTransaction().begin();
         getEntityManager().persist(entity);
+        getEntityManager().getTransaction().commit();
+        
+
     }
+    
+    
 
     public void edit(T entity) {
+        getEntityManager().getTransaction().begin();
         getEntityManager().merge(entity);
+        getEntityManager().getTransaction().commit();
     }
 
     public void remove(T entity) {
+        getEntityManager().getTransaction().begin();
         getEntityManager().remove(getEntityManager().merge(entity));
+        getEntityManager().getTransaction().commit();
     }
 
     public T find(Object id) {
         return getEntityManager().find(entityClass, id);
     }
 
+    
+    
+    public List<T> findbyField(Object tableName,Object fieldName,Object fieldValue ){
+        Query query = getEntityManager().createQuery( "Select e " + "from "+ tableName +" e " + " where " + fieldName +" like '%"+ fieldValue +"%'" );
+        return query.getResultList();
+    }
+    
+    public List<T> anyQuery(String sql ){
+        Query query = getEntityManager().createQuery( sql );
+        return query.getResultList();
+    }
+    
+    
     public List<T> findAll() {
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));

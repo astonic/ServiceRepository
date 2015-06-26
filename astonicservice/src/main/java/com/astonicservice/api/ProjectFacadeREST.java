@@ -5,12 +5,13 @@
  */
 package com.astonicservice.api;
 
+import com.astonicservice.entity.Operation;
 import com.astonicservice.entity.Project;
 import com.rest.astonicservice.jpa.EntityManagerUtil;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
+
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -39,7 +40,9 @@ public class ProjectFacadeREST extends AbstractFacade<Project> {
     @Override
     @Consumes({"application/xml", "application/json"})
     public void create(Project entity) {
+        
         super.create(entity);
+        
     }
 
     @PUT
@@ -69,6 +72,15 @@ public class ProjectFacadeREST extends AbstractFacade<Project> {
         return super.findAll();
     }
 
+    
+    @GET
+    @Path("/name/{name}")
+    @Produces({"application/xml", "application/json"})
+    public List<Project> findRelationship(@PathParam("name") String name) {
+       return super.findbyField("Project","name",name);
+    }
+    
+    
     @GET
     @Path("{from}/{to}")
     @Produces({"application/xml", "application/json"})

@@ -7,6 +7,7 @@ package com.astonicservice.entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -51,7 +52,7 @@ public class Logic implements Serializable {
     @Column(name = "documentation_url")
     private String documentationUrl;
     @JoinColumn(name = "operation_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
     private Operation operationId;
 
     public Logic() {

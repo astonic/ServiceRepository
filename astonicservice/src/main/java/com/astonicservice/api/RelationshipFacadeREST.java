@@ -51,7 +51,10 @@ public class RelationshipFacadeREST extends AbstractFacade<Relationship> {
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {
-        super.remove(super.find(id));
+        Relationship r = super.find(id);
+        r.getOperationId().getRelationshipCollection().remove(r);
+        
+        super.remove(r);
     }
 
     @GET

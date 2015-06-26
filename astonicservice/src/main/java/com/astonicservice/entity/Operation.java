@@ -7,6 +7,7 @@ package com.astonicservice.entity;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -205,5 +206,7 @@ public class Operation implements Serializable {
     public String toString() {
         return "com.astonicservice.entity.Operation[ id=" + id + " ]";
     }
+    
+    
     
 }

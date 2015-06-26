@@ -62,15 +62,14 @@ ruleModule.controller('ruleNewCtrl', function ($scope, $routeParams, $http, $roo
 
     $scope.save = function () {
         // Simple POST request example (passing data) :
-        $http.post('../RepoService/rest/data/insert',
-                {logic: {
-                        operation_id: operationId,
-                        documentation_url: $scope.rule.documentation_url,
+        $http.post('../api/logic',
+                 {
+                        operationId:{id:operationId},
+                        documentationUrl: $scope.rule.documentation_url,
                         type: $scope.rule.type,
                         description: $scope.rule.description
 
-                    }}
-        )
+                    })
 
                 .success(function (data, status, headers, config) {
                     console.info(data);
@@ -107,11 +106,9 @@ ruleModule.controller('ruleEditCtrl', function ($scope, $location, $routeParams,
 
     };
 
-    $http.post('../RepoService/rest/data/anyQuery',
-            {q: "Select * from logic where id=" + ruleId}
-    )
+    $http.get('../api/logic/' + ruleId)
             .success(function (data, status, headers, config) {
-                $scope.rule = data[0];
+                $scope.rule = data;
                 console.info(data);
 
             }).
@@ -122,15 +119,16 @@ ruleModule.controller('ruleEditCtrl', function ($scope, $location, $routeParams,
 
     $scope.update = function () {
         // Simple POST request example (passing data) :
-        $http.post('../RepoService/rest/data/update',
-                {logic: {
+        $http.put('../api/logic/' + $scope.rule.id,
+                {
                         id: $scope.rule.id,
-                        operation_id: $scope.rule.operation_id,
-                        documentation_url: $scope.rule.documentation_url,
+                        operationId: {id: $scope.rule.operation_id,
+                                        serviceId:{id: $scope.rule.operationId.serviceId.id}},
+                        documentationUrl: $scope.rule.documentation_url,
                         type: $scope.rule.type,
                         description: $scope.rule.description
 
-                    }}
+                    }
         )
 
                 .success(function (data, status, headers, config) {
@@ -179,9 +177,7 @@ ruleModule.service('LogicManager', function ($http) {
 
         // Simple POST request example (passing data) :
 
-        $http.post('../RepoService/rest/data/anyQuery',
-                {q: "select * from logic where operation_id = " + id}
-        )
+        $http.get('../api/operation/' + id +'/logic' )
                 .success(function (data, status, headers, config) {
                     console.info(data);
                     list = data;

@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jpa:entity-mappings jaxb-support="false" id="_14315976756271" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" xmlns:ns4="http://nbmodeler.java.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <jpa:entity class="Application" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_14315976757234">
+        <annotation>@javax.xml.bind.annotation.XmlRootElement</annotation>
+        <jpa:table name="application" catalog="repo" schema=""/>
+        <jpa:named-query name="Application.findAll">
+            <jpa:query>SELECT a FROM Application a</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Application.findById">
+            <jpa:query>SELECT a FROM Application a WHERE a.id = :id</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Application.findByName">
+            <jpa:query>SELECT a FROM Application a WHERE a.name = :name</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Application.findByDescription">
+            <jpa:query>SELECT a FROM Application a WHERE a.description = :description</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Application.findByDomain">
+            <jpa:query>SELECT a FROM Application a WHERE a.domain = :domain</jpa:query>
+        </jpa:named-query>
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="java.lang.Integer" visibile="true" id="_14315976757315">
+                <jpa:column name="id" unique="false" nullable="true" insertable="true" updatable="true"/>
+                <jpa:generated-value strategy="IDENTITY"/>
+                <jpa:sequence-generator name="id"/>
+            </jpa:id>
+            <jpa:basic name="name" attribute-type="java.lang.String" visibile="true" id="_14315976757346">
+                <annotation>@javax.validation.constraints.Size(max=500)</annotation>
+                <jpa:column name="name" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="description" attribute-type="java.lang.String" visibile="true" id="_14315976757367">
+                <annotation>@javax.validation.constraints.Size(max=1000)</annotation>
+                <jpa:column name="description" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="domain" attribute-type="java.lang.String" visibile="true" id="_14315976757378">
+                <annotation>@javax.validation.constraints.Size(max=100)</annotation>
+                <jpa:column name="domain" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="History" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_14315976758749">
+        <annotation>@javax.xml.bind.annotation.XmlRootElement</annotation>
+        <jpa:table name="history" catalog="repo" schema=""/>
+        <jpa:named-query name="History.findAll">
+            <jpa:query>SELECT h FROM History h</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="History.findById">
+            <jpa:query>SELECT h FROM History h WHERE h.id = :id</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="History.findByType">
+            <jpa:query>SELECT h FROM History h WHERE h.type = :type</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="History.findByDescription">
+            <jpa:query>SELECT h FROM History h WHERE h.description = :description</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="History.findByCreatedDate">
+            <jpa:query>SELECT h FROM History h WHERE h.createdDate = :createdDate</jpa:query>
+        </jpa:named-query>
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="java.lang.Integer" visibile="true" id="_143159767587510">
+                <jpa:column name="id" unique="false" nullable="true" insertable="true" updatable="true"/>
+                <jpa:generated-value strategy="IDENTITY"/>
+                <jpa:sequence-generator name="id"/>
+            </jpa:id>
+            <jpa:basic name="type" attribute-type="java.lang.String" visibile="true" id="_143159767587511">
+                <annotation>@javax.validation.constraints.Size(max=45)</annotation>
+                <jpa:column name="type" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="description" attribute-type="java.lang.String" visibile="true" id="_143159767587512">
+                <annotation>@javax.validation.constraints.Size(max=1000)</annotation>
+                <jpa:column name="description" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="createdDate" attribute-type="java.util.Date" visibile="true" id="_143159767587513">
+                <jpa:column name="createdDate" unique="false" nullable="true" insertable="true" updatable="true"/>
+                <jpa:temporal>TIMESTAMP</jpa:temporal>
+            </jpa:basic>
+            <jpa:many-to-one name="serviceId" target-entity="Service" fetch="EAGER" primaryKey="false" connected-entity-id="_143159767616547" connected-attribute-id="_143159767616661" visibile="true" id="_143159767587614"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Logic" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_143159767593715">
+        <annotation>@javax.xml.bind.annotation.XmlRootElement</annotation>
+        <jpa:table name="logic" catalog="repo" schema=""/>
+        <jpa:named-query name="Logic.findAll">
+            <jpa:query>SELECT l FROM Logic l</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Logic.findById">
+            <jpa:query>SELECT l FROM Logic l WHERE l.id = :id</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Logic.findByDescription">
+            <jpa:query>SELECT l FROM Logic l WHERE l.description = :description</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Logic.findByType">
+            <jpa:query>SELECT l FROM Logic l WHERE l.type = :type</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Logic.findByDocumentationUrl">
+            <jpa:query>SELECT l FROM Logic l WHERE l.documentationUrl = :documentationUrl</jpa:query>
+        </jpa:named-query>
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="java.lang.Integer" visibile="true" id="_143159767593716">
+                <jpa:column name="id" unique="false" nullable="true" insertable="true" updatable="true"/>
+                <jpa:generated-value strategy="IDENTITY"/>
+                <jpa:sequence-generator name="id"/>
+            </jpa:id>
+            <jpa:basic name="description" attribute-type="java.lang.String" visibile="true" id="_143159767593717">
+                <annotation>@javax.validation.constraints.Size(max=1000)</annotation>
+                <jpa:column name="description" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="type" attribute-type="java.lang.String" visibile="true" id="_143159767593718">
+                <annotation>@javax.validation.constraints.Size(max=45)</annotation>
+                <jpa:column name="type" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="documentationUrl" attribute-type="java.lang.String" visibile="true" id="_143159767593719">
+                <annotation>@javax.validation.constraints.Size(max=45)</annotation>
+                <jpa:column name="documentation_url" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:many-to-one name="operationId" target-entity="Operation" fetch="EAGER" primaryKey="false" connected-entity-id="_143159767602121" connected-attribute-id="_143159767602330" visibile="true" id="_143159767593720"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Operation" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_143159767602121">
+        <annotation>@javax.xml.bind.annotation.XmlRootElement</annotation>
+        <jpa:table name="operation" catalog="repo" schema=""/>
+        <jpa:named-query name="Operation.findAll">
+            <jpa:query>SELECT o FROM Operation o</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Operation.findById">
+            <jpa:query>SELECT o FROM Operation o WHERE o.id = :id</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Operation.findByName">
+            <jpa:query>SELECT o FROM Operation o WHERE o.name = :name</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Operation.findByDescription">
+            <jpa:query>SELECT o FROM Operation o WHERE o.description = :description</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Operation.findByRequestMsg">
+            <jpa:query>SELECT o FROM Operation o WHERE o.requestMsg = :requestMsg</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Operation.findByResponseMsg">
+            <jpa:query>SELECT o FROM Operation o WHERE o.responseMsg = :responseMsg</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Operation.findByTags">
+            <jpa:query>SELECT o FROM Operation o WHERE o.tags = :tags</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Operation.findByMepType">
+            <jpa:query>SELECT o FROM Operation o WHERE o.mepType = :mepType</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Operation.findByFlowDiagram">
+            <jpa:query>SELECT o FROM Operation o WHERE o.flowDiagram = :flowDiagram</jpa:query>
+        </jpa:named-query>
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="java.lang.Integer" visibile="true" id="_143159767602122">
+                <jpa:column name="id" unique="false" nullable="true" insertable="true" updatable="true"/>
+                <jpa:generated-value strategy="IDENTITY"/>
+                <jpa:sequence-generator name="id"/>
+            </jpa:id>
+            <jpa:basic name="name" attribute-type="java.lang.String" visibile="true" id="_143159767602123">
+                <annotation>@javax.validation.constraints.Size(max=45)</annotation>
+                <jpa:column name="name" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="description" attribute-type="java.lang.String" visibile="true" id="_143159767602124">
+                <annotation>@javax.validation.constraints.Size(max=1000)</annotation>
+                <jpa:column name="description" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="requestMsg" attribute-type="java.lang.String" visibile="true" id="_143159767602225">
+                <annotation>@javax.validation.constraints.Size(max=1000)</annotation>
+                <jpa:column name="request_msg" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="responseMsg" attribute-type="java.lang.String" visibile="true" id="_143159767602226">
+                <annotation>@javax.validation.constraints.Size(max=1000)</annotation>
+                <jpa:column name="response_msg" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="tags" attribute-type="java.lang.String" visibile="true" id="_143159767602227">
+                <annotation>@javax.validation.constraints.Size(max=100)</annotation>
+                <jpa:column name="tags" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="mepType" attribute-type="java.lang.String" visibile="true" id="_143159767602228">
+                <annotation>@javax.validation.constraints.Size(max=45)</annotation>
+                <jpa:column name="mep_type" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="flowDiagram" attribute-type="java.lang.String" visibile="true" id="_143159767602229">
+                <annotation>@javax.validation.constraints.Size(max=500)</annotation>
+                <jpa:column name="flow_diagram" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:many-to-one name="serviceId" target-entity="Service" fetch="EAGER" optional="false" primaryKey="false" connected-entity-id="_143159767616547" connected-attribute-id="_143159767616762" visibile="true" id="_143159767602332"/>
+            <jpa:one-to-many name="logicCollection" target-entity="Logic" fetch="EAGER" mapped-by="operationId" collection-type="java.util.Collection" connected-entity-id="_143159767593715" connected-attribute-id="_143159767593720" visibile="true" id="_143159767602330">
+                <annotation>@org.hibernate.annotations.Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)</annotation>
+            </jpa:one-to-many>
+            <jpa:one-to-many name="relationshipCollection" target-entity="Relationship" fetch="EAGER" mapped-by="operationId" collection-type="java.util.Collection" connected-entity-id="_143159767611539" connected-attribute-id="_143159767611646" visibile="true" id="_143159767602331">
+                <annotation>@org.hibernate.annotations.Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)</annotation>
+                <jpa:cascade>
+                    <jpa:cascade-all/>
+                </jpa:cascade>
+            </jpa:one-to-many>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Project" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_143159767607033">
+        <annotation>@javax.xml.bind.annotation.XmlRootElement</annotation>
+        <jpa:table name="project" catalog="repo" schema=""/>
+        <jpa:named-query name="Project.findAll">
+            <jpa:query>SELECT p FROM Project p</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Project.findById">
+            <jpa:query>SELECT p FROM Project p WHERE p.id = :id</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Project.findByName">
+            <jpa:query>SELECT p FROM Project p WHERE p.name = :name</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Project.findByDescription">
+            <jpa:query>SELECT p FROM Project p WHERE p.description = :description</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Project.findByProjectDocumentation">
+            <jpa:query>SELECT p FROM Project p WHERE p.projectDocumentation = :projectDocumentation</jpa:query>
+        </jpa:named-query>
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="java.lang.Integer" visibile="true" id="_143159767607034">
+                <jpa:column name="id" unique="false" nullable="true" insertable="true" updatable="true"/>
+                <jpa:generated-value strategy="IDENTITY"/>
+                <jpa:sequence-generator name="id"/>
+            </jpa:id>
+            <jpa:basic name="name" attribute-type="java.lang.String" visibile="true" id="_143159767607135">
+                <annotation>@javax.validation.constraints.Size(max=100)</annotation>
+                <jpa:column name="name" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="description" attribute-type="java.lang.String" visibile="true" id="_143159767607136">
+                <annotation>@javax.validation.constraints.Size(max=1000)</annotation>
+                <jpa:column name="description" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="projectDocumentation" attribute-type="java.lang.String" visibile="true" id="_143159767607137">
+                <annotation>@javax.validation.constraints.Size(max=1000)</annotation>
+                <jpa:column name="project_documentation" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:one-to-many name="serviceCollection" target-entity="Service" fetch="EAGER" mapped-by="projectId" collection-type="java.util.Collection" connected-entity-id="_143159767616547" connected-attribute-id="_143159767616660" visibile="true" id="_143159767607138">
+                <annotation>@org.hibernate.annotations.Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)</annotation>
+            </jpa:one-to-many>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Relationship" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_143159767611539">
+        <annotation>@javax.xml.bind.annotation.XmlRootElement</annotation>
+        <jpa:table name="relationship" catalog="repo" schema=""/>
+        <jpa:named-query name="Relationship.findAll">
+            <jpa:query>SELECT r FROM Relationship r</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Relationship.findByRelationshipId">
+            <jpa:query>SELECT r FROM Relationship r WHERE r.relationshipId = :relationshipId</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Relationship.findByRelationshipType">
+            <jpa:query>SELECT r FROM Relationship r WHERE r.relationshipType = :relationshipType</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Relationship.findByComponentType">
+            <jpa:query>SELECT r FROM Relationship r WHERE r.componentType = :componentType</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Relationship.findByDescription">
+            <jpa:query>SELECT r FROM Relationship r WHERE r.description = :description</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Relationship.findById">
+            <jpa:query>SELECT r FROM Relationship r WHERE r.id = :id</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Relationship.findByComponentName">
+            <jpa:query>SELECT r FROM Relationship r WHERE r.componentName = :componentName</jpa:query>
+        </jpa:named-query>
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="java.lang.Integer" visibile="true" id="_143159767611644">
+                <jpa:column name="id" unique="false" nullable="true" insertable="true" updatable="true"/>
+                <jpa:generated-value strategy="IDENTITY"/>
+                <jpa:sequence-generator name="id"/>
+            </jpa:id>
+            <jpa:basic name="relationshipId" optional="false" attribute-type="int" visibile="true" id="_143159767611540">
+                <annotation>@javax.validation.constraints.NotNull</annotation>
+                <jpa:column name="relationship_id" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="relationshipType" attribute-type="java.lang.String" visibile="true" id="_143159767611641">
+                <annotation>@javax.validation.constraints.Size(max=45)</annotation>
+                <jpa:column name="relationship_type" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="componentType" attribute-type="java.lang.String" visibile="true" id="_143159767611642">
+                <annotation>@javax.validation.constraints.Size(max=100)</annotation>
+                <jpa:column name="component_type" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="description" attribute-type="java.lang.String" visibile="true" id="_143159767611643">
+                <annotation>@javax.validation.constraints.Size(max=1000)</annotation>
+                <jpa:column name="description" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="componentName" attribute-type="java.lang.String" visibile="true" id="_143159767611645">
+                <annotation>@javax.validation.constraints.Size(max=100)</annotation>
+                <jpa:column name="component_name" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:many-to-one name="operationId" target-entity="Operation" fetch="EAGER" optional="false" primaryKey="false" connected-entity-id="_143159767602121" connected-attribute-id="_143159767602331" visibile="true" id="_143159767611646"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Service" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_143159767616547">
+        <annotation>@javax.xml.bind.annotation.XmlRootElement</annotation>
+        <jpa:table name="service" catalog="repo" schema=""/>
+        <jpa:named-query name="Service.findAll">
+            <jpa:query>SELECT s FROM Service s</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Service.findById">
+            <jpa:query>SELECT s FROM Service s WHERE s.id = :id</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Service.findByName">
+            <jpa:query>SELECT s FROM Service s WHERE s.name = :name</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Service.findByProtocolType">
+            <jpa:query>SELECT s FROM Service s WHERE s.protocolType = :protocolType</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Service.findByStatus">
+            <jpa:query>SELECT s FROM Service s WHERE s.status = :status</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Service.findByUri">
+            <jpa:query>SELECT s FROM Service s WHERE s.uri = :uri</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Service.findBySecured">
+            <jpa:query>SELECT s FROM Service s WHERE s.secured = :secured</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Service.findByDocumentationLoc">
+            <jpa:query>SELECT s FROM Service s WHERE s.documentationLoc = :documentationLoc</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Service.findByServiceType">
+            <jpa:query>SELECT s FROM Service s WHERE s.serviceType = :serviceType</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Service.findByDescription">
+            <jpa:query>SELECT s FROM Service s WHERE s.description = :description</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Service.findByBusinessDomain">
+            <jpa:query>SELECT s FROM Service s WHERE s.businessDomain = :businessDomain</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Service.findByTags">
+            <jpa:query>SELECT s FROM Service s WHERE s.tags = :tags</jpa:query>
+        </jpa:named-query>
+        <jpa:named-query name="Service.findByEnvironment">
+            <jpa:query>SELECT s FROM Service s WHERE s.environment = :environment</jpa:query>
+        </jpa:named-query>
+        <jpa:attributes>
+            <jpa:id name="id" attribute-type="java.lang.Integer" visibile="true" id="_143159767616548">
+                <jpa:column name="id" unique="false" nullable="true" insertable="true" updatable="true"/>
+                <jpa:generated-value strategy="IDENTITY"/>
+                <jpa:sequence-generator name="id"/>
+            </jpa:id>
+            <jpa:basic name="name" attribute-type="java.lang.String" visibile="true" id="_143159767616549">
+                <annotation>@javax.validation.constraints.Size(max=45)</annotation>
+                <jpa:column name="name" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="protocolType" attribute-type="java.lang.String" visibile="true" id="_143159767616550">
+                <annotation>@javax.validation.constraints.Size(max=45)</annotation>
+                <jpa:column name="protocol_type" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="status" attribute-type="java.lang.String" visibile="true" id="_143159767616551">
+                <annotation>@javax.validation.constraints.Size(max=45)</annotation>
+                <jpa:column name="status" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="uri" attribute-type="java.lang.String" visibile="true" id="_143159767616652">
+                <annotation>@javax.validation.constraints.Size(max=500)</annotation>
+                <jpa:column name="uri" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="secured" attribute-type="java.lang.String" visibile="true" id="_143159767616653">
+                <annotation>@javax.validation.constraints.Size(max=100)</annotation>
+                <jpa:column name="secured" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="documentationLoc" attribute-type="java.lang.String" visibile="true" id="_143159767616654">
+                <annotation>@javax.validation.constraints.Size(max=500)</annotation>
+                <jpa:column name="documentation_loc" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="serviceType" attribute-type="java.lang.String" visibile="true" id="_143159767616655">
+                <annotation>@javax.validation.constraints.Size(max=500)</annotation>
+                <jpa:column name="service_type" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="description" attribute-type="java.lang.String" visibile="true" id="_143159767616656">
+                <annotation>@javax.validation.constraints.Size(max=1000)</annotation>
+                <jpa:column name="description" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="businessDomain" attribute-type="java.lang.String" visibile="true" id="_143159767616657">
+                <annotation>@javax.validation.constraints.Size(max=100)</annotation>
+                <jpa:column name="business_domain" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="tags" attribute-type="java.lang.String" visibile="true" id="_143159767616658">
+                <annotation>@javax.validation.constraints.Size(max=100)</annotation>
+                <jpa:column name="tags" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic name="environment" attribute-type="java.lang.String" visibile="true" id="_143159767616659">
+                <annotation>@javax.validation.constraints.Size(max=1000)</annotation>
+                <jpa:column name="environment" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:many-to-one name="projectId" target-entity="Project" fetch="EAGER" primaryKey="false" connected-entity-id="_143159767607033" connected-attribute-id="_143159767607138" visibile="true" id="_143159767616660"/>
+            <jpa:one-to-many name="historyCollection" target-entity="History" fetch="EAGER" mapped-by="serviceId" collection-type="java.util.Collection" connected-entity-id="_14315976758749" connected-attribute-id="_143159767587614" visibile="true" id="_143159767616661">
+                <annotation>@org.hibernate.annotations.Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)</annotation>
+            </jpa:one-to-many>
+            <jpa:one-to-many name="operationCollection" target-entity="Operation" fetch="EAGER" mapped-by="serviceId" collection-type="java.util.Collection" connected-entity-id="_143159767602121" connected-attribute-id="_143159767602332" visibile="true" id="_143159767616762">
+                <annotation>@org.hibernate.annotations.Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)</annotation>
+                <jpa:cascade>
+                    <jpa:cascade-all/>
+                </jpa:cascade>
+            </jpa:one-to-many>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity class="Student" compositePrimaryKeyType="NONE" jaxb-root-element="false" static-metamodel="false" visibile="true" minimized="false" id="_143159767619463">
+        <jpa:table name="STUDENT"/>
+        <jpa:attributes>
+            <jpa:id name="studentId" attribute-type="long" visibile="true" id="_143159767619464">
+                <jpa:column name="STUDENTID" unique="false" nullable="true" insertable="true" updatable="true"/>
+                <jpa:generated-value strategy="AUTO"/>
+                <jpa:sequence-generator name="STUDENTID"/>
+            </jpa:id>
+            <jpa:basic name="studentName" attribute-type="java.lang.String" visibile="true" id="_143159767619465">
+                <jpa:column name="STUDENTNAME" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:basic>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:diagram id="_14315976756282">
+        <plane elementRef="_14315976756271" id="_14315976756293_p">
+            <shape elementRef="_14315976757234" id="_14315976757234_gui">
+                <Bounds x="544.0" y="46.0" width="159.0" height="134.0"/>
+            </shape>
+            <shape elementRef="_14315976758749" id="_14315976758749_gui">
+                <Bounds x="49.0" y="50.0" width="136.0" height="168.0"/>
+            </shape>
+            <shape elementRef="_143159767593715" id="_143159767593715_gui">
+                <Bounds x="880.0" y="137.0" width="148.0" height="168.0"/>
+            </shape>
+            <shape elementRef="_143159767602121" id="_143159767602121_gui">
+                <Bounds x="589.0" y="235.0" width="177.0" height="294.0"/>
+            </shape>
+            <shape elementRef="_143159767607033" id="_143159767607033_gui">
+                <Bounds x="32.0" y="281.0" width="171.0" height="168.0"/>
+            </shape>
+            <shape elementRef="_143159767611539" id="_143159767611539_gui">
+                <Bounds x="910.0" y="396.0" width="166.0" height="210.0"/>
+            </shape>
+            <shape elementRef="_143159767616547" id="_143159767616547_gui">
+                <Bounds x="326.0" y="151.0" width="164.0" height="378.0"/>
+            </shape>
+            <shape elementRef="_143159767619463" id="_143159767619463_gui">
+                <Bounds x="1095.0" y="67.0" width="140.0" height="92.0"/>
+            </shape>
+        </plane>
+    </jpa:diagram>
+</jpa:entity-mappings>

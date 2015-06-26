@@ -46,6 +46,7 @@ public class LogicFacadeREST extends AbstractFacade<Logic> {
     @Path("{id}")
     @Consumes({"application/xml", "application/json"})
     public void edit(@PathParam("id") Integer id, Logic entity) {
+        
         super.edit(entity);
     }
 

@@ -17,13 +17,10 @@ reportModule.controller('reportCtrl', function ($scope, $http, $rootScope) {
   
 
     function projectCount() {
-        $http.post('../RepoService/rest/data/anyQuery',
-                {q: 'Select count(*) as total from project'}
-        )
-
-                .success(function (data, status, headers, config) {
+       $http.get('../api/project/count')
+                       .success(function (data, status, headers, config) {
                     console.info(data);
-                    $scope.projectTotal = data[0].total;
+                    $scope.projectTotal = data;
 
                 }).
                 error(function (data, status, headers, config) {
@@ -33,13 +30,11 @@ reportModule.controller('reportCtrl', function ($scope, $http, $rootScope) {
 
 
     function operationCount() {
-        $http.post('../RepoService/rest/data/anyQuery',
-                {q: 'Select count(*) as total from operation'}
-        )
+        $http.get('../api/operation/count')
 
                 .success(function (data, status, headers, config) {
                     console.info(data);
-                    $scope.operationTotal = data[0].total;
+                    $scope.operationTotal = data;
 
                 }).
                 error(function (data, status, headers, config) {
@@ -48,13 +43,11 @@ reportModule.controller('reportCtrl', function ($scope, $http, $rootScope) {
     }
 
     function serviceCount() {
-        $http.post('../RepoService/rest/data/anyQuery',
-                {q: 'Select count(*) as total from service'}
-        )
+        $http.get('../api/service/count')
 
                 .success(function (data, status, headers, config) {
                     console.info(data);
-                    $scope.serviceTotal = data[0].total;
+                    $scope.serviceTotal = data;
 
                 }).
                 error(function (data, status, headers, config) {
@@ -63,13 +56,11 @@ reportModule.controller('reportCtrl', function ($scope, $http, $rootScope) {
     }
 
     function applicationCount() {
-        $http.post('../RepoService/rest/data/anyQuery',
-                {q: 'Select count(*) as total from application'}
-        )
+        $http.get('../api/application/count')
 
                 .success(function (data, status, headers, config) {
                     console.info(data);
-                    $scope.applicationTotal = data[0].total;
+                    $scope.applicationTotal = data;
 
                 }).
                 error(function (data, status, headers, config) {
@@ -189,11 +180,11 @@ reportModule.controller('reportCtrl', function ($scope, $http, $rootScope) {
         top10ReusedFunction();
         top10ProvidersFunction();
         servicesPerProjectFunction();
-        topInterfaceByFunctionCountFunction();
+      topInterfaceByFunctionCountFunction();
 
-        operationCount();
-        serviceCount();
-        applicationCount();
+      operationCount();
+      serviceCount();
+      applicationCount();
         projectCount();
       
        
@@ -202,11 +193,7 @@ reportModule.controller('reportCtrl', function ($scope, $http, $rootScope) {
      
      
       function topInterfaceByFunctionCountFunction() {
-        $http.post('../RepoService/rest/data/anyQuery',
-                {q: 'SELECT s.name,count(*) total FROM repo.service s, operation so where s.id = so.service_id'
-                        +' group by s.id'
-                        +' order by total desc limit 10;'
-                })
+        $http.get('../api/namedValuePair/topInterfaceByFunctionCount')
 
                 .success(function (data, status, headers, config) {
                     console.info(data);
@@ -214,7 +201,7 @@ reportModule.controller('reportCtrl', function ($scope, $http, $rootScope) {
                     //$scope.top10Reused = data;
                     for (var i = 0; i < data.length; i++) {
                       // console.info(data[i].total);
-                       topInterfaceByFunctionCount.data.push([data[i].name,data[i].total]);
+                       topInterfaceByFunctionCount.data.push([data[i][0],data[i][1]]);
                      
                               // $scope.top10Reused.lables.push( data[i].name) ;
                                //$scope.top10Reused.data.push( parseInt(data[i].total)) ;
@@ -231,26 +218,23 @@ reportModule.controller('reportCtrl', function ($scope, $http, $rootScope) {
      
      
       function top10ReusedFunction() {
-        $http.post('../RepoService/rest/data/anyQuery',
-                {q: 'Select o.name as name,count(*) total from operation o, relationship r where o.id = r.operation_id' +
-                        ' and relationship_type = "Consumed by" ' +
-                        ' group by o.id ' +
-                        ' order by total desc limit 10;'
-                })
+        $http.get('../api/namedValuePair/top10ReusedFunction')
 
                 .success(function (data, status, headers, config) {
                     console.info(data);
-           // chart1.data = data;
-                    //$scope.top10Reused = data;
+                 
+                  //$scope.top10Reused = data;
                     for (var i = 0; i < data.length; i++) {
-                      // console.info(data[i].total);
-                       top10Reused.data.push([data[i].name,data[i].total]);
-                     
+                       console.info('test:'+data[i][1]);
+                       
+                       if (data[i].total != 'undefined'){
+                       top10Reused.data.push([data[i][0],data[i][1]]);
+                       }
                               // $scope.top10Reused.lables.push( data[i].name) ;
                                //$scope.top10Reused.data.push( parseInt(data[i].total)) ;
                     }
-                    console.info('chart1.data');
-                     console.info(top10Reused.data);
+                    //console.info('chart1.data');
+                     //console.info(top10Reused.data);
                        $scope.chart = top10Reused;
 
                 }).
@@ -262,20 +246,16 @@ reportModule.controller('reportCtrl', function ($scope, $http, $rootScope) {
 
 
  function top10ProvidersFunction() {
-        $http.post('../RepoService/rest/data/anyQuery',
-                {q: 'Select r.component_name as name,count(*) total from operation o, relationship r where o.id = r.operation_id'
-                        + ' and relationship_type = "Provided by" '
-                        + ' group by r.component_name'
-                        + ' order by total desc limit 10;'
-                })
+        $http.get('../api/namedValuePair/top10ProvidersFunction')
 
                 .success(function (data, status, headers, config) {
-                    console.info(data);
+                    console.info(data[0]);
+            
            // chart1.data = data;
                     //$scope.top10Reused = data;
                     for (var i = 0; i < data.length; i++) {
                       // console.info(data[i].total);
-                       top10Providers.data.push([data[i].name,data[i].total]);
+                       top10Providers.data.push([data[i][0],data[i][1]]);
                      
                               // $scope.top10Reused.lables.push( data[i].name) ;
                                //$scope.top10Reused.data.push( parseInt(data[i].total)) ;
@@ -295,10 +275,7 @@ reportModule.controller('reportCtrl', function ($scope, $http, $rootScope) {
 
 
 function servicesPerProjectFunction() {
-        $http.post('../RepoService/rest/data/anyQuery',
-                {q: 'select p.name as name,count(*) total from service s, project p where p.id = s.project_id '
-                    + ' group by p.id limit 10; '
-                })
+        $http.get('../api/namedValuePair/servicesPerProjectFunction')
 
                 .success(function (data, status, headers, config) {
                     console.info(data);
@@ -306,7 +283,7 @@ function servicesPerProjectFunction() {
                     //$scope.top10Reused = data;
                     for (var i = 0; i < data.length; i++) {
                       // console.info(data[i].total);
-                       servicesPerProject.data.push([data[i].name,data[i].total]);
+                       servicesPerProject.data.push([data[i][0],data[i][1]]);
                      
                               // $scope.top10Reused.lables.push( data[i].name) ;
                                //$scope.top10Reused.data.push( parseInt(data[i].total)) ;

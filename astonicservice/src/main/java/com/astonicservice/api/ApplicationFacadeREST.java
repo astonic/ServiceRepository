@@ -6,6 +6,7 @@
 package com.astonicservice.api;
 
 import com.astonicservice.entity.Application;
+import com.astonicservice.entity.Operation;
 import com.rest.astonicservice.jpa.EntityManagerUtil;
 import java.util.List;
 
@@ -28,17 +29,20 @@ import javax.ws.rs.Produces;
 
 @Path("/application")
 public class ApplicationFacadeREST extends AbstractFacade<Application> {
-    @PersistenceContext(unitName = "test")
-   private EntityManager em = EntityManagerUtil.getEntityManager();
+    private EntityManager em;
 
     public ApplicationFacadeREST() {
         super(Application.class);
+        this.em = EntityManagerUtil.getEntityManager();
     }
 
     @POST
     @Override
     @Consumes({"application/xml", "application/json"})
     public void create(Application entity) {
+        System.out.println(entity);
+        System.out.println(em.isOpen());
+        
         super.create(entity);
     }
 
@@ -69,6 +73,13 @@ public class ApplicationFacadeREST extends AbstractFacade<Application> {
         return super.findAll();
     }
 
+    
+     @GET
+    @Path("/name/{name}")
+    @Produces({"application/xml", "application/json"})
+    public List<Application> findRelationship(@PathParam("name") String name) {
+       return super.findbyField("Application","name",name);
+    }
     @GET
     @Path("{from}/{to}")
     @Produces({"application/xml", "application/json"})

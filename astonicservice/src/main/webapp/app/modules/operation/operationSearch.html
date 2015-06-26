@@ -21,7 +21,7 @@
                 <p class="small">Search looks at tags and name. You can use % pre/post for a wildcard search  </p>
                 <div ng-repeat="operation in operations"  class="one-result">
 
-                    <a ng-href="#/operationEdit/{{operation.service_id}}/{{operation.id}}" class="large">{{operation.name}}</a>
+                    <a ng-href="#/operationEdit/{{operation.serviceId.id}}/{{operation.id}}" class="large"> {{operation.serviceId.name}} :: {{operation.name}}</a>
                     <p>{{operation.description}}</p>
                 </div>
             </div>

@@ -27,7 +27,7 @@
                             <div class="col-sm-5">
                                 <div class="dropdown">
                                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"  >
-                                        {{operation.mep_type}}
+                                        {{operation.mepType}}
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
@@ -53,19 +53,19 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Flow Diagram:</label>
                             <div class="col-sm-5">
-                                <input type="text" class="form-control" ng-model="operation.flow_diagram" data-original-title="" title="">
+                                <input type="text" class="form-control" ng-model="operation.flowDiagram" data-original-title="" title="">
                             </div>
                             <small class="help-block col-sm-offset-3 col-sm-9" style="display: none;"></small></div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Request sample</label>
                             <div class="col-sm-5">
-                                <textarea  class="form-control" ng-model="operation.request_msg"  name="color" data-original-title="" title=""></textarea>
+                                <textarea  class="form-control" ng-model="operation.requestMsg"  name="color" data-original-title="" title=""></textarea>
                             </div>
                             <small class="help-block col-sm-offset-3 col-sm-9" style="display: none;"></small></div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Response sample</label>
                             <div class="col-sm-5">
-                                <textarea  class="form-control" ng-model="operation.response_msg"  data-original-title="" title=""></textarea>
+                                <textarea  class="form-control" ng-model="operation.responseMsg"  data-original-title="" title=""></textarea>
                             </div>
                             <small class="help-block col-sm-offset-3 col-sm-9" style="display: none;"></small></div>
                         <div class="form-group">
@@ -128,9 +128,9 @@
                     <tbody>
 
                         <tr ng-repeat="relationship in relationships">
-                            <td><a ng-href="#/{{relationship.component_type | typeToLink }}/{{relationship.relationship_id}}"> {{relationship.component_name}} </a> </td>
-                            <td>{{relationship.component_type}}</td>
-                            <td>{{relationship.relationship_type}}</td>
+                            <td><a ng-href="#/{{relationship.componentType | typeToLink }}/{{relationship.relationshipId}}"> {{relationship.componentName}} </a> </td>
+                            <td>{{relationship.componentType}}</td>
+                            <td>{{relationship.relationshipType}}</td>
                             <td>
                                 <button type="button "  ng-click="removeRelationship(relationship.id)" class="btn btn-danger btn-xs pull-right" aria-label="Left Align">
                                     <i class="fa fa-trash-o"></i> Delete

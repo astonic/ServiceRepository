@@ -43,7 +43,7 @@
                     </fieldset>
                     
                     <div class="">
-                        <button type="button" ng-disabled="{{!$root.update}}"  ng-show="{{edit}}" class="btn btn-danger"><i class="fa fa-trash-o"></i>&nbsp;Delete</button>
+                        <button type="button" ng-disabled="{{!$root.update}}"  ng-click="delete()" ng-show="{{edit}}" class="btn btn-danger"><i class="fa fa-trash-o"></i>&nbsp;Delete</button>
                         <button type="button" ng-disabled="{{!$root.update}}" ng-click="save()" ng-show="{{!edit}}" class="btn btn-info"><i class="fa fa-save"></i>&nbsp;Save</button>
                         <button type="button" ng-disabled="{{!$root.update}}" ng-click="update()" ng-show="{{edit}}"  class="btn btn-info"><i class="fa fa-pencil"></i>&nbsp;Update</button>
                        

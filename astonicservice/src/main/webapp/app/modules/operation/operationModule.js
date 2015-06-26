@@ -85,9 +85,7 @@ operationModule.controller('searchOperationCtrl', function ($scope, $http, $root
      $scope.searchValue = "%";
     $scope.doSearch = function () {
         // Simple POST request example (passing data) :
-        $http.post('../RepoService/rest/data/anyQuery',
-                {q: 'Select * from operation where name like "' + $scope.searchValue + '" or description like "' + $scope.searchValue + '"'}
-        )
+        $http.get('../api/operation/name/' + $scope.searchValue) 
 
                 .success(function (data, status, headers, config) {
                     console.info(data);
@@ -139,9 +137,7 @@ operationModule.service('OperationsManager', function ($http) {
 
         // Simple POST request example (passing data) :
 
-        $http.post('../RepoService/rest/data/anyQuery',
-                {q: "select operation.id as id,operation.name as name,operation.description as description from operation where  operation.service_id=" + id}
-        )
+        $http.get('../api/service/'+id +'/operations')
                 .success(function (data, status, headers, config) {
                     console.info(data);
                    list = data;
@@ -296,10 +292,10 @@ operationModule.controller('newOperationCtrl', function ($scope, $routeParams, $
 
     var serviceId = $routeParams.serviceId;
     $scope.operation = {};
-    $scope.operation.mep_type = "Synch";
+    $scope.operation.mepType = "Synch";
     $scope.edit = false;
     $scope.mepType = function (type) {
-        $scope.operation.mep_type = type;
+        $scope.operation.mepType = type;
 
     };
     
@@ -319,17 +315,18 @@ operationModule.controller('newOperationCtrl', function ($scope, $routeParams, $
 
     $scope.save = function () {
         // Simple POST request example (passing data) :
-        $http.post('../RepoService/rest/data/insert',
-                {operation: {
+        $http.post('../api/operation',
+                {
                         name: $scope.operation.name,
-                        request_msg: $scope.operation.request_msg,
-                        response_msg: $scope.operation.response_msg,
-                        mep_type: $scope.operation.mep_type,
+                        requestMsg: $scope.operation.requestMsg,
+                        responseMsg: $scope.operation.responseMsg,
+                        mepType: $scope.operation.mepType,
+                        flowDiagram: $scope.operation.flowDiagram,
                         tags: $scope.operation.tags,
                         description: $scope.operation.description,
-                        service_id: $scope.service.id
+                        serviceId:{ id:$scope.service.id}
 
-                    }}
+                    }
         )
 
                 .success(function (data, status, headers, config) {
@@ -337,13 +334,11 @@ operationModule.controller('newOperationCtrl', function ($scope, $routeParams, $
                   
                     $scope.operation.id = data;
 
-
-                    if ($scope.operation.id != 0) {
                         $scope.edit = true;
                         $window.alert('Operation created!!');
                          history.back();
                         
-                    }
+                  
 
 
                 }).
@@ -364,23 +359,11 @@ operationModule.controller('editOperationCtrl', function ($scope, $routeParams, 
     
     $scope.service = {};
     
-    function getServiceFromOperation(){
-        $scope.service =  ServiceManager.get($scope.operation.service_id) ;
-    
-       if($scope.service === undefined || $scope.service === null || $scope.service === ""){
-             console.log(" editOperationCtrl calling list is null:");
-             ServiceManager.refresh(function(data){
-                  $scope.service = ServiceManager.get($scope.operation.service_id); 
-             });
-           
-        }
-    }
-    
-    
+     
 
     
     $scope.mepType = function (type) {
-        $scope.operation.mep_type = type;
+        $scope.operation.mepType = type;
 
     };
 
@@ -391,13 +374,11 @@ operationModule.controller('editOperationCtrl', function ($scope, $routeParams, 
     getRulesList(operationId);
     getRelationshipList(operationId);
 
-    $http.post('../RepoService/rest/data/anyQuery',
-            {q: "Select * from operation where id=" + operationId}
-    )
+    $http.get('../api/operation/'+operationId)
             .success(function (data, status, headers, config) {
-                $scope.operation = data[0];
-               getServiceFromOperation();
+                $scope.operation = data;
                 console.info(data);
+                 $scope.service = $scope.operation.serviceId;
 
             }).
             error(function (data, status, headers, config) {
@@ -408,19 +389,20 @@ operationModule.controller('editOperationCtrl', function ($scope, $routeParams, 
 
     $scope.update = function () {
         // Simple POST request example (passing data) :
-        $http.post('../RepoService/rest/data/update',
-                {operation: {
+        $http.put('../api/operation/' + operationId ,
+                 {
                         id: operationId,
                         name: $scope.operation.name,
                         description: $scope.operation.description,
-                        flow_diagram: $scope.operation.flow_diagram,
-                        mep_type: $scope.operation.mep_type,
+                        flowDiagram: $scope.operation.flowDiagram,
+                        mepType: $scope.operation.mepType,
                         tags: $scope.operation.tags,
-                        request_msg: $scope.operation.request_msg,
-                        response_msg: $scope.operation.response_msg
+                        requestMsg: $scope.operation.requestMsg,
+                        responseMsg: $scope.operation.responseMsg, 
+                        serviceId:{id: $scope.service.id}
 
 
-                    }}
+                    }
         )
 
                 .success(function (data, status, headers, config) {
@@ -434,8 +416,7 @@ operationModule.controller('editOperationCtrl', function ($scope, $routeParams, 
 
     function getRulesList(id) {
         // Simple POST request example (passing data) :
-        $http.post('../RepoService/rest/data/anyQuery',
-                {q: "select * from logic where operation_id=" + id})
+        $http.get('../api/operation/' +id +'/logic')
 
                 .success(function (data, status, headers, config) {
                     console.info(data);
@@ -451,8 +432,7 @@ operationModule.controller('editOperationCtrl', function ($scope, $routeParams, 
     $scope.relationships = [];
     function getRelationshipList(id) {
         // Simple POST request example (passing data) :
-        $http.post('../RepoService/rest/data/anyQuery',
-                {q: "select * from relationship where operation_id=" + id})
+        $http.get('../api/operation/'+id + '/relationship')
 
                 .success(function (data, status, headers, config) {
                     console.info(data);
@@ -468,9 +448,7 @@ operationModule.controller('editOperationCtrl', function ($scope, $routeParams, 
 
     $scope.delete = function () {
         
-        $http.post('../RepoService/rest/data/operationDelete',
-                {id: $scope.operation.id}
-        )
+        $http.delete('../api/operation/'+ $scope.operation.id)
 
                 .success(function (data, status, headers, config) {
                     console.info(data);
@@ -481,6 +459,8 @@ operationModule.controller('editOperationCtrl', function ($scope, $routeParams, 
                 error(function (data, status, headers, config) {
                     console.info(data);
                 });
+        
+       
 
     };
 
@@ -489,11 +469,7 @@ operationModule.controller('editOperationCtrl', function ($scope, $routeParams, 
 
     $scope.removeRelationship = function (id) {
         console.info("remove " + id);
-        $http.post('../RepoService/rest/data/delete',
-                {relationship: {
-                        id: id
-                    }}
-        )
+        $http.delete('../api/relationship/' +id)
 
                 .success(function (data, status, headers, config) {
                     console.info(data);

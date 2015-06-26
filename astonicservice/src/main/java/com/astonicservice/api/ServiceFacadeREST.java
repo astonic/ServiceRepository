@@ -5,8 +5,11 @@
  */
 package com.astonicservice.api;
 
+import com.astonicservice.entity.History;
+import com.astonicservice.entity.Operation;
 import com.astonicservice.entity.Service;
 import com.rest.astonicservice.jpa.EntityManagerUtil;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -60,6 +63,29 @@ public class ServiceFacadeREST extends AbstractFacade<Service> {
     public Service find(@PathParam("id") Integer id) {
         return super.find(id);
     }
+    
+    
+    @GET
+    @Path("{id}/operations")
+    @Produces({"application/xml", "application/json"})
+    public Collection<Operation> findOperations(@PathParam("id") Integer id) {
+        return super.find(id).getOperationCollection();
+    }
+    
+    @GET
+    @Path("{id}/history")
+    @Produces({"application/xml", "application/json"})
+    public Collection<History> findHistory(@PathParam("id") Integer id) {
+        return super.find(id).getHistoryCollection();
+    }
+    
+    @GET
+    @Path("/name/{name}")
+    @Produces({"application/xml", "application/json"})
+    public List<Service> findRelationship(@PathParam("name") String name) {
+       return super.findbyField("Service","name",name);
+    }
+    
 
     @GET
     @Override
@@ -67,6 +93,9 @@ public class ServiceFacadeREST extends AbstractFacade<Service> {
     public List<Service> findAll() {
         return super.findAll();
     }
+    
+   
+    
 
     @GET
     @Path("{from}/{to}")
