@@ -1,0 +1,8 @@
+
+
+$ git commit -m "Pre Cleanup" 
+$ git rm -r --cached . 
+$ git add . 
+$ git commit -m ".gitignore setup and cleaned up"
+
+ 

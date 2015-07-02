@@ -1,16 +1,16 @@
-Starting the derby server
-C:\"Program Files"\Java\jdk1.8.0_25\db\bin\startNetworkServer.bat
-
+To run this you need: 
+ GIT
+ mvn 
 
 Running the program 
-java -jar target/astonicservice-1.0-SNAPSHOT.jar
-
-mvn jetty:run 
+    mvn jetty:run 
+then: 
+    http://localhost:8080
 
 
 Testing the program
 http://localhost:8080/api/rest/application
 
-http://localhost:8080/entry-point/test
 
-http://localhost:8080/entry-point/students
+After creating the bin. 
+java -jar target/astonicservice-1.0-SNAPSHOT.jar
