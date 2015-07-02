@@ -73,12 +73,14 @@ public class Operation implements Serializable {
     @Column(name = "mep_type")
     private String mepType;
     @Size(max = 500)
+    @Column(name = "flow_image")
+    private byte[] flowImage;
     @Column(name = "flow_diagram")
     private String flowDiagram;
     @OneToMany(mappedBy = "operationId", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     private Collection<Logic> logicCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "operationId", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "operationId", fetch = FetchType.LAZY)
     @Fetch(value = FetchMode.SUBSELECT)
     private Collection<Relationship> relationshipCollection;
     @JoinColumn(name = "service_id", referencedColumnName = "id")
@@ -205,6 +207,20 @@ public class Operation implements Serializable {
     @Override
     public String toString() {
         return "com.astonicservice.entity.Operation[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the flowImage
+     */
+    public byte[] getFlowImage() {
+        return flowImage;
+    }
+
+    /**
+     * @param flowImage the flowImage to set
+     */
+    public void setFlowImage(byte[] flowImage) {
+        this.flowImage = flowImage;
     }
     
     

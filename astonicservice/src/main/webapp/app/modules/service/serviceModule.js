@@ -24,7 +24,7 @@ serviceModule.controller('serviceCtrl', function ($scope, $routeParams, $http, $
     ProjectManager.refresh(function (data) {
         $scope.projects = data;
         $scope.project.name = $scope.projects[0].name;
-        $scope.service.project_id = $scope.project.id;
+        $scope.service.project_id = $scope.projects[0].id;
     });
     
     
@@ -71,7 +71,6 @@ serviceModule.controller('serviceCtrl', function ($scope, $routeParams, $http, $
                     console.info(data);
                     $scope.service.id = data;
 
-
                     if ($scope.service.id != 0) {
                         $scope.edit = true;
                         $location.path('/serviceEdit/' + $scope.service.id);
@@ -107,16 +106,12 @@ serviceModule.controller('updateServiceCtrl', function ($scope, $location, $rout
     getOperations(serviceId);
     getHistory(serviceId);
     $scope.project = {};
-
+    getProjectInfoAfterServiceLoads();
+ 
      function getProjectInfoAfterServiceLoads(){
          ProjectManager.refresh(function (data) {
-        $scope.projects = data;
-        if ($scope.service.projectId != null){
-        $scope.project.name = ProjectManager.get($scope.service.projectId.Id).name;
-      }else{
-        $scope.project.name = $scope.projects[0].name;
-        $scope.service.project_id = $scope.projects[0].id;
-      }
+         $scope.projects = data;
+       
     });
     }
     
@@ -158,11 +153,11 @@ serviceModule.controller('updateServiceCtrl', function ($scope, $location, $rout
     };
 
     $scope.componentType = function (type) {
-        $scope.service.service_type = type;
+        $scope.service.serviceType = type;
 
     };
     $scope.protocolType = function (type) {
-        $scope.service.protocol_type = type;
+        $scope.service.protocolType = type;
 
     };
     $scope.serviceStatus = function (type) {
@@ -179,8 +174,8 @@ serviceModule.controller('updateServiceCtrl', function ($scope, $location, $rout
                         id: serviceId,
                         name: $scope.service.name,
                         documentationLoc: $scope.service.documentation_loc,
-                        serviceType: $scope.service.service_type,
-                        protocolType: $scope.service.protocol_type,
+                        serviceType: $scope.service.serviceType,
+                        protocolType: $scope.service.protocolType,
                         uri: $scope.service.uri,
                         status: $scope.service.status,
                         description: $scope.service.description,

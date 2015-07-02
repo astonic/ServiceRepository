@@ -74,7 +74,7 @@ public class ApplicationFacadeREST extends AbstractFacade<Application> {
     }
 
     
-     @GET
+    @GET
     @Path("/name/{name}")
     @Produces({"application/xml", "application/json"})
     public List<Application> findRelationship(@PathParam("name") String name) {

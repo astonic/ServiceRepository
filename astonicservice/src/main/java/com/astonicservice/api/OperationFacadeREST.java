@@ -43,9 +43,10 @@ public class OperationFacadeREST extends AbstractFacade<Operation> {
 
     @POST
     @Override
-    @Consumes({"application/xml", "application/json"})
-    public void create(Operation entity) {
-        super.create(entity);
+    @Consumes({"application/xml", "application/json","application/octet-stream"})
+    public Integer save(Operation entity) {
+        
+        return super.save(entity);
     }
 
     @PUT
@@ -123,6 +124,8 @@ public class OperationFacadeREST extends AbstractFacade<Operation> {
     public String countREST() {
         return String.valueOf(super.count());
     }
+    
+   
 
     @Override
     protected EntityManager getEntityManager() {

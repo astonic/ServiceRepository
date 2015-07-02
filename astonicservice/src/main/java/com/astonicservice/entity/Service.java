@@ -93,6 +93,7 @@ public class Service implements Serializable {
     @JoinColumn(name = "project_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
     private Project projectId;
+     
     @OneToMany(mappedBy = "serviceId", fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
     @Fetch(value = FetchMode.SUBSELECT)
     private Collection<History> historyCollection;

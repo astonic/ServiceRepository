@@ -8,6 +8,7 @@ package com.astonicservice.entity;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,8 +24,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+
+
 
 /**
  *
@@ -52,7 +53,7 @@ public class Project implements Serializable {
     @Size(max = 1000)
     @Column(name = "description")
     private String description;
-    @Size(max = 1000)
+    @Size(max = 1000) 
     @Column(name = "project_documentation")
     private String projectDocumentation;
     @OneToMany(mappedBy = "projectId", fetch = FetchType.EAGER)

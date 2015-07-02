@@ -12,41 +12,42 @@
         <link href="css/normalize.css" rel="stylesheet" type="text/css"/>
         <link href="css/main.css" rel="stylesheet" type="text/css"/>
         <link href="lib/ng-tree/angular-ui-tree.min.css" rel="stylesheet" type="text/css"/>
-        
+
     </head> 
-    <body>
- 
-       
-            <nav class="navbar  navbar-inverse">
-                <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" ng-href="#/"><i class="fa fa-laptop fa-lg"></i>&nbsp; Service Repository</a>
-                    </div>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                  
-
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#/login" ng-hide="update" class="btn"> <i class="fa fa-sign-in"></i> Login</a>
-                                <a href="#/logOut" ng-hide="!update" class="btn"><i class="fa fa-sign-out"></i> Log Out</a>
-                            </li>
-                        </ul>
-                   
-                </div><!-- /.container-fluid -->
-            </nav>
+    
+    <body >
 
 
+        <nav class="navbar  navbar-inverse">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" ng-href="#/"><i class="fa fa-laptop fa-lg"></i>&nbsp; Service Repository</a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
 
 
-            <!-- /. NAV SIDE  -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#/login" ng-hide="update" class="btn"> <i class="fa fa-sign-in"></i> Login</a>
+                        <a href="#/logOut" ng-hide="!update" class="btn"><i class="fa fa-sign-out"></i> Log Out</a>
+                    </li>
+                </ul>
 
- <div class="container well well">
+            </div><!-- /.container-fluid -->
+        </nav>
+
+
+
+
+        <!-- /. NAV SIDE  -->
+
+        <div class="container well well">
             <div class="row">  
                 <div class="col-md-3">
                     <div class="sidebar-nav">
@@ -63,51 +64,50 @@
                 </div>
                 <div class="col-md-9" >
                     <div ng-controller="appCtrl">
-                       
-                        <div id="mydiv" ng-show="loading" >
- 
-    <img src="css/ajax-loader.gif" class="ajax-loader"/>
-</div>
-                        
-                        
-                        <div ng-view autoscroll="true" > style="width: 98%">
 
+                        <div id="mydiv" ng-show="loading" >
+                            <img src="css/ajax-loader.gif" class="ajax-loader"/>
                         </div>
-   
-                        
+                        <div ng-view autoscroll="true" > 
+                        </div>
                     </div>
-                  
-                                         </div>
-                </div>     
+
+                </div>
+               
+            </div>     
             
+
+            
+
+
             <!-- /. PAGE INNER  -->
             <small> Update set to:{{update}}</small>
             <small class="pull-right">  Version : 0.0.1 &nbsp;</small>
 
         </div>       
 
-
+         
 
         <!-- JQUERY SCRIPTS -->
         <script src="lib/jquery/jquery-1.11.2.min.js" type="text/javascript"></script>
 
         <!-- BOOTSTRAP SCRIPTS -->
         <script src="lib/bootstrap/bootstrap.min.js" type="text/javascript"></script>
-       
+
         <script src="lib/angular/angular.min.js" type="text/javascript"></script>
-       
+
         <script src="lib/angular/angular-route.min.js" type="text/javascript"></script>
-     
-        
+
+
         <script src="lib/chartsjs/ng-google-chart.js" type="text/javascript"></script>
         <script src="lib/bootstrap/ui-bootstrap-tpls-0.12.1.min.js" type="text/javascript"></script>
-       
-   
+
+
         <script src="app/app.js" type="text/javascript"></script>
         <script src="app/modules/landing/homeModule.js" type="text/javascript"></script>
         <script src="app/modules/service/serviceModule.js" type="text/javascript"></script>
         <script src="app/modules/operation/operationModule.js" type="text/javascript"></script>
-     
+
         <script src="app/modules/application/applicationModule.js" type="text/javascript"></script>
         <script src="app/modules/project/projectModule.js" type="text/javascript"></script>
         <script src="app/modules/relationship/relationshipModule.js" type="text/javascript"></script>
@@ -117,5 +117,11 @@
         <script src="app/modules/report/reportModule.js" type="text/javascript"></script>
         <script src="app/common/filters.js" type="text/javascript"></script>
         <script src="lib/ng-tree/angular-ui-tree.min.js" type="text/javascript"></script>
+        <script src="lib/ng-flow/ng-flow-standalone.min.js" type="text/javascript"></script>
+
+        <script src="lib/SVG/directives.js" type="text/javascript"></script>
+        <script src="lib/SVG/services.js" type="text/javascript"></script>
+        <script src="lib/SVG/controllers.js" type="text/javascript"></script>
+
     </body>
 </html>

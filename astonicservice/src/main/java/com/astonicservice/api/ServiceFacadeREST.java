@@ -37,11 +37,15 @@ public class ServiceFacadeREST extends AbstractFacade<Service> {
         super(Service.class);
     }
 
+    
+    
+    
     @POST
-    @Override
     @Consumes({"application/xml", "application/json"})
-    public void create(Service entity) {
-        super.create(entity);
+    @Override
+    public Integer save(Service entity) {
+    
+        return super.save(entity);
     }
 
     @PUT

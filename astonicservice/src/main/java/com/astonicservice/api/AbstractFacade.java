@@ -5,9 +5,15 @@
  */
 package com.astonicservice.api;
 
+import com.rest.astonicservice.jpa.EntityManagerUtil;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
 /**
  *
@@ -15,9 +21,12 @@ import javax.persistence.Query;
  */
 public abstract class AbstractFacade<T> {
     private Class<T> entityClass;
-
+       @PersistenceContext(unitName = "test")
+      private EntityManager em = EntityManagerUtil.getEntityManager();
+       
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
+        
     }  
 
     protected abstract EntityManager getEntityManager();
@@ -27,8 +36,28 @@ public abstract class AbstractFacade<T> {
         getEntityManager().persist(entity);
         getEntityManager().getTransaction().commit();
         
-
+       
     }
+      
+   public Integer save(T entity){
+       
+         Session session = (Session)em.getDelegate();
+         Integer id = null; 
+         Transaction tx = null;
+         try {
+            tx = session.beginTransaction();
+            id = (Integer) session.save(entity);
+            tx.commit();
+         }
+         catch (Exception e) {
+            if (tx!=null) tx.rollback();
+            e.printStackTrace(); 
+         }finally {
+            session.close();
+         }
+       return id; 
+       
+   }
     
     
 

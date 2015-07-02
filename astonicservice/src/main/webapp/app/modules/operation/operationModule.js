@@ -20,7 +20,11 @@ operationModule.controller('operationFieldsCtrl', function ($scope, $http, $root
             $scope.fields = data;
         });
     }
-     
+    
+
+    
+    
+    
      $scope.allowSave = true; 
        $scope.newRow = function(){
            $scope.allowSave = true;
@@ -311,7 +315,19 @@ operationModule.controller('newOperationCtrl', function ($scope, $routeParams, $
            
         }
 
-
+        
+    $scope.upload = function(){
+  var f = document.getElementById('file').files[0],
+      r = new FileReader();
+  r.onloadend = function(e){
+    var data = e.target.result;
+    //send you binary data via $http or $resource or do anything else with it
+    $scope.operation.flowImage = data;
+    // console.info(data);
+     
+  };
+  r.readAsBinaryString(f);
+};
 
     $scope.save = function () {
         // Simple POST request example (passing data) :
@@ -322,6 +338,7 @@ operationModule.controller('newOperationCtrl', function ($scope, $routeParams, $
                         responseMsg: $scope.operation.responseMsg,
                         mepType: $scope.operation.mepType,
                         flowDiagram: $scope.operation.flowDiagram,
+                        flowImage: $scope.operation.flowImage,
                         tags: $scope.operation.tags,
                         description: $scope.operation.description,
                         serviceId:{ id:$scope.service.id}
@@ -443,8 +460,7 @@ operationModule.controller('editOperationCtrl', function ($scope, $routeParams, 
                 error(function (data, status, headers, config) {
                     console.info(data);
                 });
-    }
-    ;
+    };
 
     $scope.delete = function () {
         
@@ -468,7 +484,7 @@ operationModule.controller('editOperationCtrl', function ($scope, $routeParams, 
 
 
     $scope.removeRelationship = function (id) {
-        console.info("remove " + id);
+       
         $http.delete('../api/relationship/' +id)
 
                 .success(function (data, status, headers, config) {

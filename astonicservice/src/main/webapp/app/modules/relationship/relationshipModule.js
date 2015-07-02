@@ -10,7 +10,7 @@ var relationshipModule = angular.module('relationshipModule', ['ngRoute']);
 /**********************************************/
 
 
-relationshipModule.controller('linkRelationCtrl', function ($scope, $routeParams, $http, $window, OperationsManager,ServiceManager) {
+relationshipModule.controller('linkRelationCtrl', function ($scope, $routeParams, $http,$location, $window, OperationsManager,ServiceManager) {
 
     var operationId = $routeParams.operationId;
     var serviceId = $routeParams.serviceId;
@@ -134,7 +134,8 @@ relationshipModule.controller('linkRelationCtrl', function ($scope, $routeParams
 
                     $scope.edit = true;
                     $window.alert('Linked :)!');
-                    history.back();
+                    $location.path('/operationEdit/'  + serviceId +'/'+ operationId );
+                   
                     //scope.$apply();
 
                 }).

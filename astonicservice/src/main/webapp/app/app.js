@@ -6,7 +6,7 @@
 
 
 
-var repo = angular.module('repo', ['ngRoute','customFilters','googlechart','reportModule','homeModule','serviceModule','operationModule','applicationRepoModule','projectModule','relationshipModule','ruleModule','directiveModule','historyModule','ui.bootstrap','ui.tree']);
+var repo = angular.module('repo', ['ngRoute','customFilters','googlechart','reportModule','homeModule','serviceModule','operationModule','applicationRepoModule','projectModule','relationshipModule','ruleModule','directiveModule','historyModule','ui.bootstrap','ui.tree','flow']);
 
 // configure our routes
 repo.config(function ($routeProvider) {
@@ -17,7 +17,11 @@ repo.config(function ($routeProvider) {
                 templateUrl: 'app/modules/landing/home.html',
                 controller: 'homeCtrl'
             })
-
+            .when('/image', {
+                templateUrl: 'app/modules/operation/svg.html',
+                controller: 'AppController'
+                
+            })
             .when('/operationFields/:operationId', {
                 templateUrl: 'app/modules/operation/operationFields.html',
                 controller: 'operationFieldsCtrl'

@@ -40,7 +40,7 @@ public class ProjectFacadeREST extends AbstractFacade<Project> {
     @Override
     @Consumes({"application/xml", "application/json"})
     public void create(Project entity) {
-        
+       
         super.create(entity);
         
     }
